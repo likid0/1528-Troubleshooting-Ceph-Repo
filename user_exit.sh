@@ -85,7 +85,9 @@ done
 curl https://public.dhe.ibm.com/ibmdl/export/pub/storage/ceph/ibm-storage-ceph-7-rhel-9.repo | sudo tee /etc/yum.repos.d/ibm-storage-ceph-7-rhel-9.repo
 dnf install ceph-common -y
 scp -pr ceph-node1:/etc/ceph/ /etc/
-sleep 90
+sleep 120
 ceph config-key get mgr/cephadm/registry_credentials | jq . > /root/scripts/registry.json
 scp /root/scripts/registry.json root@ceph-node1:/root/scripts
+sleep 180
+bash /root/scripts/deploy_cluster.sh
 exit 0
