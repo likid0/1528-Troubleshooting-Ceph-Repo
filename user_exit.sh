@@ -10,8 +10,8 @@ cp ./break_and_fix1.yaml /root/scripts
 cp ./break_and_fix2.yaml /root/scripts
 cp -pr ./build /root/docs
 cp -pr ./build $USER_HOME/docs
-chown -R $USER $USER_HOME/docs
-chmod -R 644 $USER_HOME/docs
+chown -R $USER:$USER $USER_HOME/docs
+chmod -R 755 $USER_HOME/docs
 ssh ceph-node1 "mkdir /root/scripts"
 scp ./purge_cluster.sh root@ceph-node1:/root/scripts
 scp ./new_cluster_deploy.sh root@ceph-node1:/root/scripts
