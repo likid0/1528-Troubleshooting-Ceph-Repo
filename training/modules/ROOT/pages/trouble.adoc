@@ -1,5 +1,3 @@
-IBM Storage Ceph Troubleshooting Workshop Guide 
-
 //++++
 //<link rel="stylesheet"  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/3.1.0/css/font-awesome.min.css">
 //++++
@@ -16,8 +14,10 @@ IBM Storage Ceph Troubleshooting Workshop Guide
 
 == Introduction
 
-This troubleshooting guide provides a hands-on approach to diagnosing and resolving issues in an IBM Storage Ceph cluster. Through a "break and fix" methodology, you will start with a healthy cluster, intentionally introduce topics, and then follow the guide to resolve them step-by-step. This approach ensures a practical learning experience and helps users confidently handle real-world troubleshooting scenarios.
-
+This troubleshooting guide offers a practical, hands-on approach to diagnosing
+and resolving issues within an IBM Storage Ceph cluster. By employing a 'break
+and fix' methodology, you will begin with a healthy cluster, simulate
+real-world challenges, that you will need to resolve . This approach ensures a practical learning experience and helps users confidently handle real-world troubleshooting scenarios.
 
 == Checking the current state of the lab
 
@@ -51,15 +51,22 @@ Once the TechZone lab is deployed, a pre-configured environment for testing and 
 
 == Breaking our Ceph Cluster
 
-To intentionally break the environment for troubleshooting purposes, we will execute a playbook designed to simulate issues. This will be done using the `nohup` command, which allows the playbook to run in the background independently of the terminal session. Ensure you execute these commands from the workstation as root:
+To intentionally break the environment for troubleshooting purposes, we will
+execute an ansible playbook designed to simulate real life issues in our
+healthy cluster. 
+
+We will use the `nohup` command, which allows the playbook to run in the background independently of the terminal session. Ensure you execute these commands from the workstation as root:
 
 ----
-# sudo -i
+$ sudo -i
 # nohup bash -c "ansible-playbook /root/scripts/break_and_fix1.yaml | tee -a /root/ansible.log" &
 ----
 
 You can monitor the progress of the playbook by checking the Ansible log. When the log reaches the task with the message:
-`TASK [Don't stop this playbook; leave it running during the session]`, indicates the playbook has completed its initial setup, and you can proceed to the next steps.
+
+*TASK [Don't stop this playbook; leave it running during the session]*
+
+indicates the playbook has completed its initial setup, and you can proceed to the next steps.
 
 ----
 # tail -f /root/ansible.log

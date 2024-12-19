@@ -105,14 +105,32 @@
   <div class="toc-menu"></div>
 </aside>
 <article class="doc">
-<div class="paragraph">
-<p>IBM Storage Ceph Troubleshooting Workshop Guide</p>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_introduction">1. Introduction</a></li>
+<li><a href="#_checking_the_current_state_of_the_lab">2. Checking the current state of the lab</a></li>
+<li><a href="#_breaking_our_ceph_cluster">3. Breaking our Ceph Cluster</a></li>
+<li><a href="#_let_the_fun_begin_fixing_our_cluster_issues">4. Let the Fun Begin, Fixing our cluster issues:</a>
+<ul class="sectlevel2">
+<li><a href="#_fixing_issue_number_1">4.1. Fixing Issue Number 1</a></li>
+<li><a href="#_fixing_issue_number_2">4.2. Fixing Issue Number 2</a></li>
+<li><a href="#_fixing_issue_number_3">4.3. Fixing Issue Number 3</a></li>
+<li><a href="#_fixing_issue_number_4">4.4. Fixing Issue Number 4</a></li>
+<li><a href="#_fixing_issue_number_5">4.5. Fixing Issue Number 5</a></li>
+<li><a href="#_fixing_issue_number_6">4.6. Fixing Issue Number 6</a></li>
+</ul>
+</li>
+</ul>
 </div>
 <div class="sect1">
 <h2 id="_introduction"><a class="anchor" href="#_introduction"></a>1. Introduction</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This troubleshooting guide provides a hands-on approach to diagnosing and resolving issues in an IBM Storage Ceph cluster. Through a "break and fix" methodology, you will start with a healthy cluster, intentionally introduce topics, and then follow the guide to resolve them step-by-step. This approach ensures a practical learning experience and helps users confidently handle real-world troubleshooting scenarios.</p>
+<p>This troubleshooting guide offers a practical, hands-on approach to diagnosing
+and resolving issues within an IBM Storage Ceph cluster. By employing a 'break
+and fix' methodology, you will begin with a healthy cluster, simulate
+real-world challenges, that you will need to resolve . This approach ensures a practical learning experience and helps users confidently handle real-world troubleshooting scenarios.</p>
 </div>
 </div>
 </div>
@@ -154,17 +172,27 @@
 <h2 id="_breaking_our_ceph_cluster"><a class="anchor" href="#_breaking_our_ceph_cluster"></a>3. Breaking our Ceph Cluster</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>To intentionally break the environment for troubleshooting purposes, we will execute a playbook designed to simulate issues. This will be done using the <code>nohup</code> command, which allows the playbook to run in the background independently of the terminal session. Ensure you execute these commands from the workstation as root:</p>
+<p>To intentionally break the environment for troubleshooting purposes, we will
+execute an ansible playbook designed to simulate real life issues in our
+healthy cluster.</p>
+</div>
+<div class="paragraph">
+<p>We will use the <code>nohup</code> command, which allows the playbook to run in the background independently of the terminal session. Ensure you execute these commands from the workstation as root:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># sudo -i
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ sudo -i
 # nohup bash -c "ansible-playbook /root/scripts/break_and_fix1.yaml | tee -a /root/ansible.log" &amp;</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>You can monitor the progress of the playbook by checking the Ansible log. When the log reaches the task with the message:
-<code>TASK [Don&#8217;t stop this playbook; leave it running during the session]</code>, indicates the playbook has completed its initial setup, and you can proceed to the next steps.</p>
+<p>You can monitor the progress of the playbook by checking the Ansible log. When the log reaches the task with the message:</p>
+</div>
+<div class="paragraph">
+<p><strong>TASK [Don&#8217;t stop this playbook; leave it running during the session]</strong></p>
+</div>
+<div class="paragraph">
+<p>indicates the playbook has completed its initial setup, and you can proceed to the next steps.</p>
 </div>
 <div class="listingblock">
 <div class="content">

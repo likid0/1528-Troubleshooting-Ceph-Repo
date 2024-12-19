@@ -3,33 +3,42 @@
 
 *Welcome to the IBM Storage Ceph Troubleshooting Training!!*
 
-The IBM Storage Ceph Troubleshooting Training is an in-depth IBM Storage Ceph enablement that will provide you with a good understanding of the Ceph Architecture, Advanced Hands-on technical skills and also basic knowledge on how to size a Ceph Cluster.
+The IBM Storage Ceph Troubleshooting Training is an in-depth IBM Storage Ceph
+enablement that will provide you with a good understanding of the Core Ceph
+Architecture, Through Advanced Hands-on technical skills with a break and fix
+Lab.
 
 == Audience Recommended skill-set.
 
-* Distributed Linux systems skills(Red Hat Certified System Administrator (RHCSA)).
+* Basic knowledge of IBM Storage Ceph.
 * Container (e.g. image/registry) and container runtime concepts.
-* Familiar with storage protocol concepts (RAID, SAN, NFS, S3, Swift, ...).
+* Basic Linux OS CLI skills.
 
 == Recommended Pre-Requisites before starting the enablement. 
 
 Before completing this course, there is some pre-requisite recommended training,
 that we would recommend completing before starting this enablement.
 
+. https://techzone.ibm.com/my/reservations/create/6567862cba056800175b6279[Install and Configure a Ceph Cluster] : Learn to set up a robust IBM Storage Ceph environment from scratch and deploy the Object Storage service using the Dashboard.
+. https://techzone.ibm.com/my/reservations/create/66c880e5eff555001e6e3582[Explore Advanced Object Storage Features] : Dive deep into SSL configuration, bucket policies, audit logs, Storage Class Tiering, and lifecycle management to enhance the security and efficiency of your object storage.
+. https://techzone.ibm.com/my/reservations/create/66c882763c41c8001e807f3c[Experience Unified Storage] : Gain hands-on experience with Ceph’s unified storage capabilities, including Block (RBD), File (NFS), and Object (S3), showcasing its versatility as an all-in-one storage solution.
+These labs demonstrate how IBM Storage Ceph can meet diverse enterprise storage needs, providing a scalable, secure, and unified storage solution. By mastering the deployment and management of block, file, and object storage within a single platform, organizations can streamline their storage infrastructure, improve operational efficiency, and reduce costs while ensuring data availability and integrity across various workloads.
+
+Also these resources can be very handy!: 
 
 . https://www.youtube.com/watch?v=PmLPbrf-x9g[Ceph Introduction by Sage]
 . https://www.redbooks.ibm.com/redpieces/pdfs/redp5721.pdf[IBM Storage Ceph Concepts and Architecture Guide Redbook]
-. https://www.redbooks.ibm.com/redpieces/pdfs/redp5715.pdf[IBM Storage Ceph Solutions Guide Redbook] 
 
 == Enablement Content Index and Agenda.
 
 The estimated time needed to go through the workshop is 120 minutes
 
-Click on this xref:trouble.adoc[link] to access the trouble shootingi and get started. 
-
 == Looking for support during the enablement?
 
 Any questions related to the training can be asked on the `#ceph-help` channel on the `IBM Storage` workspace.
+
+[.btn.btn-primary]
+https://www.ibm.com/products/ceph[Troubleshooting Guide - Start the Course Now!]
 
 [IMPORTANT]
 ====
@@ -40,4 +49,6 @@ This Enablement is not IBM official documentation for Ceph. For the official doc
 . IBM Storage Ceph website: link:https://www.ibm.com/products/ceph[Visit here]
 . IBM Storage Ceph documentation: link:http://docs.ceph.blue[View documentation]
 . IBM Storage Ceph video demos: link:http://easy.ceph.blue[Watch demos]
+. https://www.redbooks.ibm.com/redpieces/pdfs/redp5715.pdf[IBM Storage Ceph Solutions Guide Redbook] 
+
 
