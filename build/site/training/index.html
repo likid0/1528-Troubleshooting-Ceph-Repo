@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>IBM Storage Ceph Troubleshooting Workshop :: Ceph Top Gun Enablement</title>
+    <link rel="canonical" href="https://likid0.github.io/ceph-top-gun-enablement/training/index.html">
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../_/css/site.css">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank">
+          <img src="../_/img/header_logo_reverse.svg" height="48px" alt="Ceph">
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Get Help</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://access.redhat.com/documentation/zh-cn/red_hat_ceph_storage/5" target="_blank">Ceph Documentation</a>
+            <a class="navbar-item" href="https://bugzilla.redhat.com/describecomponents.cgi?product=Red%20Hat%20OpenShift%20Container%20Storage" target="_blank">Browse Bugs</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Improve Guides</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/likid0/ceph-top-gun-enablement/issues/new/choose" target="_blank">Open Issue</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Infos</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/en/blog/channel/red-hat-storage" target="_blank">Our Blog</a>
+            <a class="navbar-item" href="https://www.youtube.com/channel/UCoyG8VyvB-XUxQl1mD3T3Gw" target="_blank">Youtube</a>
+            <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank">Ceph Storage Technology</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="training" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
+    <h3 class="title"><a href="index.html">IBM Storage Ceph Troubleshooting Workshop</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">IBM Storage Ceph Troubleshooting Workshop</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="trouble.html">IBM Storage Ceph Troubleshooting Workshop</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">IBM Storage Ceph Troubleshooting Workshop</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <div class="title"><a href="index.html">IBM Storage Ceph Troubleshooting Workshop</a></div>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link is-current"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">IBM Storage Ceph Troubleshooting Workshop</a></li>
+  </ul>
+</nav>
+<div class="edit-this-page"><a href="file:///antora/training/modules/ROOT/pages/index.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">IBM Storage Ceph Troubleshooting Workshop</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Welcome to the IBM Storage Ceph Troubleshooting Training!!</strong></p>
+</div>
+<div class="paragraph">
+<p>The IBM Storage Ceph Troubleshooting Training is an in-depth IBM Storage Ceph enablement that will provide you with a good understanding of the Ceph Architecture, Advanced Hands-on technical skills and also basic knowledge on how to size a Ceph Cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_audience_recommended_skill_set"><a class="anchor" href="#_audience_recommended_skill_set"></a>Audience Recommended skill-set.</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Distributed Linux systems skills(Red Hat Certified System Administrator (RHCSA)).</p>
+</li>
+<li>
+<p>Container (e.g. image/registry) and container runtime concepts.</p>
+</li>
+<li>
+<p>Familiar with storage protocol concepts (RAID, SAN, NFS, S3, Swift, &#8230;&#8203;).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_recommended_pre_requisites_before_starting_the_enablement"><a class="anchor" href="#_recommended_pre_requisites_before_starting_the_enablement"></a>Recommended Pre-Requisites before starting the enablement.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before completing this course, there is some pre-requisite recommended training,
+that we would recommend completing before starting this enablement.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="https://www.youtube.com/watch?v=PmLPbrf-x9g">Ceph Introduction by Sage</a></p>
+</li>
+<li>
+<p><a href="https://www.redbooks.ibm.com/redpieces/pdfs/redp5721.pdf">IBM Storage Ceph Concepts and Architecture Guide Redbook</a></p>
+</li>
+<li>
+<p><a href="https://www.redbooks.ibm.com/redpieces/pdfs/redp5715.pdf">IBM Storage Ceph Solutions Guide Redbook</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_enablement_content_index_and_agenda"><a class="anchor" href="#_enablement_content_index_and_agenda"></a>Enablement Content Index and Agenda.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The estimated time needed to go through the workshop is 120 minutes</p>
+</div>
+<div class="paragraph">
+<p>Click on this <a href="trouble.html" class="xref page">link</a> to access the trouble shootingi and get started.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_looking_for_support_during_the_enablement"><a class="anchor" href="#_looking_for_support_during_the_enablement"></a>Looking for support during the enablement?</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Any questions related to the training can be asked on the <code>#ceph-help</code> channel on the <code>IBM Storage</code> workspace.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This Enablement is not IBM official documentation for Ceph. For the official documentation, please see <a href="https://www.ibm.com/docs/en/storage-ceph/8" class="bare">https://www.ibm.com/docs/en/storage-ceph/8</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_other_interesting_links"><a class="anchor" href="#_other_interesting_links"></a>Other interesting Links</h2>
+<div class="sectionbody">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>IBM Storage Ceph website: <a href="https://www.ibm.com/products/ceph">Visit here</a></p>
+</li>
+<li>
+<p>IBM Storage Ceph documentation: <a href="http://docs.ceph.blue">View documentation</a></p>
+</li>
+<li>
+<p>IBM Storage Ceph video demos: <a href="http://easy.ceph.blue">Watch demos</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="navbar-item" href="https://www.redhat.com/en/technologies/cloud-computing/openshift-container-storage" target="_blank">
+      <img src="../_/img/header_logo.svg" alt="Ceph">
+  </a>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

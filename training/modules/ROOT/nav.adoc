@@ -1,0 +1,2 @@
+.IBM Storage Ceph Troubleshooting Workshop
+* xref:trouble.adoc[IBM Storage Ceph Troubleshooting Workshop]

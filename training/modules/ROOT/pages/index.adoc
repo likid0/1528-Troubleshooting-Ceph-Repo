@@ -1,0 +1,43 @@
+= IBM Storage Ceph Troubleshooting Workshop
+
+
+*Welcome to the IBM Storage Ceph Troubleshooting Training!!*
+
+The IBM Storage Ceph Troubleshooting Training is an in-depth IBM Storage Ceph enablement that will provide you with a good understanding of the Ceph Architecture, Advanced Hands-on technical skills and also basic knowledge on how to size a Ceph Cluster.
+
+== Audience Recommended skill-set.
+
+* Distributed Linux systems skills(Red Hat Certified System Administrator (RHCSA)).
+* Container (e.g. image/registry) and container runtime concepts.
+* Familiar with storage protocol concepts (RAID, SAN, NFS, S3, Swift, ...).
+
+== Recommended Pre-Requisites before starting the enablement. 
+
+Before completing this course, there is some pre-requisite recommended training,
+that we would recommend completing before starting this enablement.
+
+
+. https://www.youtube.com/watch?v=PmLPbrf-x9g[Ceph Introduction by Sage]
+. https://www.redbooks.ibm.com/redpieces/pdfs/redp5721.pdf[IBM Storage Ceph Concepts and Architecture Guide Redbook]
+. https://www.redbooks.ibm.com/redpieces/pdfs/redp5715.pdf[IBM Storage Ceph Solutions Guide Redbook] 
+
+== Enablement Content Index and Agenda.
+
+The estimated time needed to go through the workshop is 120 minutes
+
+Click on this xref:trouble.adoc[link] to access the trouble shootingi and get started. 
+
+== Looking for support during the enablement?
+
+Any questions related to the training can be asked on the `#ceph-help` channel on the `IBM Storage` workspace.
+
+[IMPORTANT]
+====
+This Enablement is not IBM official documentation for Ceph. For the official documentation, please see https://www.ibm.com/docs/en/storage-ceph/8
+====
+
+== Other interesting Links
+. IBM Storage Ceph website: link:https://www.ibm.com/products/ceph[Visit here]
+. IBM Storage Ceph documentation: link:http://docs.ceph.blue[View documentation]
+. IBM Storage Ceph video demos: link:http://easy.ceph.blue[Watch demos]
+

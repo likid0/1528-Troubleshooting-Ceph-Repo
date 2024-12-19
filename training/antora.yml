@@ -1,0 +1,5 @@
+name: training
+title: IBM Storage Ceph Troubleshooting Workshop
+version: master
+nav:
+  - modules/ROOT/nav.adoc

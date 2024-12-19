@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Top Gun Enablement Content Index and Agenda. :: Ceph Top Gun Enablement</title>
+    <link rel="canonical" href="https://likid0.github.io/ceph-top-gun-enablement/training/agenda.html">
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank">
+          <img src="../_/img/header_logo_reverse.svg" height="48px" alt="Ceph">
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Get Help</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://access.redhat.com/documentation/zh-cn/red_hat_ceph_storage/5" target="_blank">Ceph Documentation</a>
+            <a class="navbar-item" href="https://bugzilla.redhat.com/describecomponents.cgi?product=Red%20Hat%20OpenShift%20Container%20Storage" target="_blank">Browse Bugs</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Improve Guides</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/likid0/ceph-top-gun-enablement/issues/new/choose" target="_blank">Open Issue</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Infos</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/en/blog/channel/red-hat-storage" target="_blank">Our Blog</a>
+            <a class="navbar-item" href="https://www.youtube.com/channel/UCoyG8VyvB-XUxQl1mD3T3Gw" target="_blank">Youtube</a>
+            <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank">Ceph Storage Technology</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="training" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Ceph Top-Gun Enablement</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Lab Setup</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="opentlc_lab_env.html">Opentlc Lab Env</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Core Ceph</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_introduction.html">Ceph Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_architecture.html">Ceph Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cluster_partitioning.html">Ceph Cluster Partitioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_hardware.html">Ceph Hardware Recommendations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deployment_intro.html">Ceph Install Methods </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cephadm_intro.html">Cephadm Orchestrator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deploy_basic.html">Deploy Ceph with Cephadm</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deploy_ui.html">Deploy Ceph from the UI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_dashboard_metrics.html">Ceph Dashboard Management &amp; Metrics</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cli_intro.html">Ceph CLI basic commands</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_configuration.html">Ceph Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_pools.html">Ceph storage pools config</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_pgs.html">Ceph Health and PGs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_bluestore.html">Ceph OSD Bluestore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_recovery.html">Ceph OSD Failure/Recovery</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cephx.html">Rados CephX Auth/AuthZ</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_version.html">What version of Ceph am I running?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deployment_challenge.html">Challenge Ceph Deployment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph RADOS Block Device</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_intro.html">RADOS Block Device introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_export.html">RBD Import/Export</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_mirroring.html">RBD Mirroring</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_challenge.html">Challenge RBD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">CephFS Shared FileSystem</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephfs_intro.html">CephFS introduction &amp; Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephfs_advanced.html">CephFS Deep Dive</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cephfs_challenge.html">Challenge Cephfs</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph RadosGW</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_intro.html">RGW Introduction &amp; Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_arch_deep_dive.html">RGW Deep Dive</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_ha.html">RGW High Availability</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_ssl.html">RGW &amp; Ingress with SSL</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_users_quotas.html">RGW Users &amp; Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_auth.html">RGW Auth &amp; Authz</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_object_versioning.html">RGW S3 Object Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_placement_and_storage_classes.html">RGW Placement &amp; Storage Classes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_life_cycle_management.html">RGW Life Cycle Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_bucket_policy.html">RGW S3 Bucket Policy</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_sts_introduction.html">RGW Secure Token Service</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_sts_bucket_role_policy.html">RGW Bucket vs Role Policy</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_multisite.html">RGW Multisite Replication</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_cloudsync.html">RGW Object Cloud Transition</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_archive.html">RGW Archive Zone</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_presignedurl.html">RGW presigned URL</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_opslog.html">RGW Opslog</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_bucket_notification.html">RGW bucket Notification</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_object_lock.html">RGW Object Lock</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="MFA_object_delete.html">RGW MFA Delete</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_rgw_challenge.html">Challenge RGW</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Upgrades</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_upgrade_4_to_5.html">Ceph Upgrade from RHCS 4 to IBMCS 5.3</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph-upgrades_cephadm.html">Minor Version Upgrades with Cephadm</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="troubleshooting_logging.html">Troubleshooting Logs Debug Mode</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="trouble-shooting-nearfull-osds.html">Troubleshooting nearfull OSDs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="troubleshooting_bluestore.html">Troubleshooting Bluestore issues</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="trouble-shooting-large-omap-objects.html">Troubleshooting Large Omap Objects</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="troubleshooting_cephadm_device_ls.html">Troubleshooting Cephadm devcice ls </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="troubleshooting_break_and_fix.html">Troubleshooting Break &amp; Fix Hands-on</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Benchmarking</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_performance_example.html">Setting the Inital Baseline</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_performance_fio.html">Benchmarking Ceph block and File</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_performance_object.html">Benchmarking Ceph Object(RGW)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Stretched</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="rhcs-stretched-deploy.html">Ceph Stretch Mode</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Challenge Solutions</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deployment_challenge_solution.html">Ceph Deployment Solution</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_challenge_solution.html">Ceph RBD Solution</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cephfs_challenge_solution.html">Ceph CephFS Solution</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_rgw_challenge_solution.html">Ceph RGW Solution</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Ceph Top-Gun Enablement</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">Ceph Top-Gun Enablement</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Ceph Top-Gun Enablement</a></li>
+    <li><a href="agenda.html">Top Gun Enablement Content Index and Agenda.</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///antora/training/modules/ROOT/pages/agenda.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Top Gun Enablement Content Index and Agenda.</h1>
+<div class="sect1">
+<h2 id="_tips_recommendations"><a class="anchor" href="#_tips_recommendations"></a>1. Tips, Recommendations.</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Each of the links will take you to a new section. For a better experience, use the <strong>Open in a new tab</strong> browser option so you always have the agenda available.</p>
+</li>
+<li>
+<p>Don&#8217;t Hurry! read carefully through the materials.</p>
+</li>
+<li>
+<p>Understand and double check the TIPs/Notices/Warning Boxes, as they have essential information to complete the labs successfully</p>
+</li>
+<li>
+<p>Don&#8217;t copy and paste through the exercises. Take your time to understand what you are doing</p>
+</li>
+<li>
+<p>Most of the sections have additional docs. Check them out if time permits</p>
+</li>
+<li>
+<p>The hands-on labs cover the basics of each feature. Think like a customer and try to go further and explore.</p>
+</li>
+<li>
+<p>Most of the sections have a slide deck available, Check them out.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_getting_started_setting_up_the_lab"><a class="anchor" href="#_getting_started_setting_up_the_lab"></a>2. Getting started. Setting up the Lab</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The first step, is to get our OpenTLC Lab ready. Follow the instructions in this <a href="opentlc_lab_env.html" class="xref page">link</a></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_core_ceph"><a class="anchor" href="#_core_ceph"></a>3. Core Ceph.</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_ceph_basics_slides"><a class="anchor" href="#_ceph_basics_slides"></a>3.1. Ceph Basics. <a href="https://ibm.ent.box.com/file/1113112702376">Slides</a></h3>
+<div class="paragraph">
+<p>Before deploying Ceph let&#8217;s make sure we have a good understanding of Ceph’s architecture.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="ceph_introduction.html" class="xref page">Ceph Introduction</a></p>
+</li>
+<li>
+<p><a href="ceph_architecture.html" class="xref page">Ceph Architecture</a></p>
+</li>
+<li>
+<p><a href="ceph_cluster_partitioning.html" class="xref page">Ceph Cluster Partitioning</a></p>
+</li>
+<li>
+<p><a href="ceph_pgs.html" class="xref page">Ceph Cluster Health and PGs</a></p>
+</li>
+<li>
+<p><a href="ceph_deployment_intro.html" class="xref page">Ceph Install Methods</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_getting_ceph_deployed_slides"><a class="anchor" href="#_getting_ceph_deployed_slides"></a>3.2. Getting Ceph Deployed. <a href="https://ibm.ent.box.com/file/1113121078640">Slides</a></h3>
+<div class="paragraph">
+<p>With the basics covered, let&#8217;s do our first ceph deployment, we can use the CLI
+or the UI to deploy ceph:</p>
+</div>
+<div class="paragraph">
+<p>To deploy using the CLI, follow:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="ceph_deploy_basic.html" class="xref page">Ceph deployment with CLI</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>To deploy with the UI, follow:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="ceph_deploy_ui.html" class="xref page">Ceph deployment with the UI</a></p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If at any point you need help with cephadm(ceph orch) commands in this
+<a href="ceph_cephadm_intro.html" class="xref page">section</a> we have a very comprehensive cephadm tutorial,
+to help you out</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_getting_to_know_ceph"><a class="anchor" href="#_getting_to_know_ceph"></a>3.3. Getting to know Ceph</h3>
+<div class="paragraph">
+<p>Let&#8217;s get our hands dirty and start working with our Ceph Cluster.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="ceph_cli_intro.html" class="xref page">Ceph Cli Introduction</a></p>
+</li>
+<li>
+<p><a href="ceph_version.html" class="xref page">What version of Ceph am I running?</a></p>
+</li>
+<li>
+<p><a href="ceph_configuration.html" class="xref page">Ceph Configuration</a></p>
+</li>
+<li>
+<p><a href="ceph_pools.html" class="xref page">Ceph Pool Introduction</a></p>
+</li>
+<li>
+<p><a href="ceph_dashboard_metrics.html" class="xref page">Ceph Dashboard &amp; Metrics</a>. <a href="https://ibm.box.com/s/7dt4dl61pacy0m89083ocvqlqv5t1rbj">Slides</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_going_deeper_ceph_ha_recovering_from_failure_and_bluestore"><a class="anchor" href="#_going_deeper_ceph_ha_recovering_from_failure_and_bluestore"></a>3.4. Going deeper, Ceph HA, Recovering from failure and Bluestore</h3>
+<div class="paragraph">
+<p>We need to understand how Ceph detects a failure. <a href="https://ibm.box.com/s/6p3xgkkzr6i52l8arkemnrdsze5q3ikp">Slides</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="ceph_recovery.html" class="xref page">Ceph Recovery from OSD Failure</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s cover bluestore, and its details. <a href="https://ibm.ent.box.com/file/1116052555786">Slides</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#ceph_bluestore">Understanding Ceph Bluestore</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Where are my logs? understanding how logging works in ceph.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="troubleshooting_logging.html" class="xref page">Logs &amp; Ceph</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ceph_deployment_challange"><a class="anchor" href="#_ceph_deployment_challange"></a>3.5. Ceph Deployment Challange</h3>
+<div class="paragraph">
+<p>Try and fight your way through the challenge, use the
+<a href="#ceph_deployment_challenge_solution">challenge solutions</a> only as a last
+resource.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="ceph_deployment_challenge.html" class="xref page">Ceph Deployment Challenge</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rados_block_devicerbd"><a class="anchor" href="#_rados_block_devicerbd"></a>4. Rados Block Device(RBD).</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_rbd_features_slides_starting_at_35"><a class="anchor" href="#_rbd_features_slides_starting_at_35"></a>4.1. RBD features <a href="https://ibm.box.com/s/lzr99fdbp8aketp7glr2g3vewdj5yens">Slides. Starting at 35</a></h3>
+<div class="paragraph">
+<p>Explore the main RBD features in the following sections:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="cephrbd_intro.html" class="xref page">RBD Introduction</a></p>
+</li>
+<li>
+<p><a href="cephrbd_export.html" class="xref page">RBD Export/Import</a></p>
+</li>
+<li>
+<p><a href="cephrbd_mirroring.html" class="xref page">RBD Mirror</a></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>With the intro of RBD covered, is an excellent time to side-track and explore Ceph
+authentication and authorisation: CephX</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="ceph_cephx.html" class="xref page">Ceph Auth/AuthZ: CephX</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_rbd_challenge"><a class="anchor" href="#_rbd_challenge"></a>4.2. RBD Challenge</h3>
+<div class="paragraph">
+<p>Try to fight through the challenge, use the
+<a href="cephrbd_challenge_solution.html" class="xref page">challenge solutions</a> only as a last
+resource.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="cephrbd_challenge.html" class="xref page">RBD Challenge</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ceph_shared_filesystemcephfs"><a class="anchor" href="#_ceph_shared_filesystemcephfs"></a>5. Ceph Shared Filesystem(CephFS).</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_cephfs_introduction_slides"><a class="anchor" href="#_cephfs_introduction_slides"></a>5.1. CephFS Introduction. <a href="https://ibm.ent.box.com/file/1111113545913?s=8aa224marcqyubk5c39x9um9lx5dmzyk">Slides</a></h3>
+<div class="paragraph">
+<p>Get cephfs deployed on your Ceph Lab, and start working on the different
+hands-on labs in this section.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="cephfs_intro.html" class="xref page">Cephfs Introduction &amp; Deployment</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cephfs_deep_dive"><a class="anchor" href="#_cephfs_deep_dive"></a>5.2. CephFS Deep-dive.</h3>
+<div class="paragraph">
+<p>This section goes deeper into all the CephFS functionality, gets to understand
+many of the more complex cephfs features through Hands-on Labs.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#cephfs_advanced">Cephfs Deep Dive</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Explore the CephX caps, and it&#8217;s importance for CephFS in the following slide deck:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://ibm.ent.box.com/file/1125154476666">Working with Cephx Caps</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_rados_gateways3swift_object_storage"><a class="anchor" href="#_rados_gateways3swift_object_storage"></a>6. Rados Gateway(S3/Swift Object Storage).</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_radosgw_introduction_slides"><a class="anchor" href="#_radosgw_introduction_slides"></a>6.1. RadosGW Introduction. <a href="https://ibm.ent.box.com/file/1110061798460">Slides</a>.</h3>
+<div class="paragraph">
+<p>Get familiar with Ceph RadosGW and how to deploy in a High Available Fashion,
+Also, configure User &amp; Bucket Quotas.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="radosgw_intro.html" class="xref page">RadosGW Deployment</a></p>
+</li>
+<li>
+<p><a href="radosgw_ha.html" class="xref page">RadosGW High Avilability</a></p>
+</li>
+<li>
+<p><a href="radosgw_ssl.html" class="xref page">Deploy RadosGW with SSL</a></p>
+</li>
+<li>
+<p><a href="radosgw_users_quotas.html" class="xref page">RadosGW Quotas</a></p>
+</li>
+<li>
+<p><a href="radosgw_opslog.html" class="xref page">RadosGW OpsLogs</a></p>
+</li>
+<li>
+<p><a href="radosgw_presignedurl.html" class="xref page">RadosGW pre-signed URLs</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_radosgw_architecture_deep_dive"><a class="anchor" href="#_radosgw_architecture_deep_dive"></a>6.2. RadosGW Architecture Deep dive</h3>
+<div class="paragraph">
+<p>Take a deep dive into RGW&#8217;s internal features and data layout in the following section.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#radosgw_arch_deep_dive">RadosGW Deep Dive</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>We also explore all the authentication and authorisation options we have in RGW.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="radosgw_auth.html" class="xref page">RadosGW Auth/AuthZ options</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_s3_bucket_policies_sts_and_iam_roles_slides"><a class="anchor" href="#_s3_bucket_policies_sts_and_iam_roles_slides"></a>6.3. S3 Bucket Policies, STS and IAM roles. <a href="https://ibm.box.com/s/4hrwsc6a8mu9ptp4prl3xm9o8s0vwpj6">Slides</a></h3>
+<div class="paragraph">
+<p>We gently introduce you to the power of bucket policies with the following
+hands-on lab.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="radosgw_bucket_policy.html" class="xref page">RadosGW Bucket Policy Example</a></p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Get a grasp of the Secure Token Service and Role policies</p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p><a href="radosgw_sts_introduction.html" class="xref page">RadosGW Secure Token Service</a></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="radosgw_sts_bucket_role_policy.html" class="xref page">RadosGW Bucket Policy vs Role Policy</a></p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_object_storage_tiering_with_the_help_of_life_cycle_policies"><a class="anchor" href="#_object_storage_tiering_with_the_help_of_life_cycle_policies"></a>6.4. Object Storage Tiering with the help of Life Cycle Policies</h3>
+<div class="paragraph">
+<p>Tiering in S3 with the help of placement groups, Storage Classes and Life Cycle Policies</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="radosgw_placement_and_storage_classes.html" class="xref page">RadosGW Placement targets and Storage Classes</a></p>
+</li>
+<li>
+<p><a href="radosgw_life_cycle_management.html" class="xref page">RadosGW Life Cycle Policies</a></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Tiering into the Cloud, with the help of the RGW Cloud transitions feature</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#radosgw_cloudsync">RadosGW Cloud Transitions</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_multi_site_replication"><a class="anchor" href="#_multi_site_replication"></a>6.5. Multi-Site Replication</h3>
+<div class="paragraph">
+<p>Get a taste of the Multi-Site replication feature in RGW with the help of this
+lab.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#radosgw_multisite">RadosGW Multisite Replication</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_s3_versioning_and_the_archival_zone"><a class="anchor" href="#_s3_versioning_and_the_archival_zone"></a>6.6. S3 versioning and the Archival Zone</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#radosgw_object_versioning">RadosGW Object Versioning</a></p>
+</li>
+<li>
+<p><a href="#radosgw_archive">RadosGW Archive Zone</a></p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_s3_bucket_notifications"><a class="anchor" href="#_s3_bucket_notifications"></a>6.7. S3 bucket notifications</h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="radosgw_bucket_notification.html" class="xref page">RadosGW bucket Notification</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_radosgw_challenge"><a class="anchor" href="#_radosgw_challenge"></a>6.8. RadosGW Challenge</h3>
+<div class="paragraph">
+<p>Try to fight through the challenge. Use the
+<a href="ceph_rgw_challenge_solution.html" class="xref page">challenge solutions</a> only as a last
+resource.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="ceph_rgw_challenge.html" class="xref page">RadosGW Challenge</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_getting_to_know_the_rgw_zipper_project"><a class="anchor" href="#_getting_to_know_the_rgw_zipper_project"></a>6.9. Getting to know the RGW Zipper project</h3>
+<div class="paragraph">
+<p><a href="https://ibm.box.com/s/ie1u68la901mjp9sfaqbu6eyryg8wd0w">Project Zipper Slide Deck</a>
+<a href="https://www.youtube.com/watch?v=4zCFWLpKM_U">Project Zipper Demo</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ceph_troubleshooting"><a class="anchor" href="#_ceph_troubleshooting"></a>7. Ceph Troubleshooting.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Have fun with a break-and-fix exercise that will challenge your Ceph knowledge
+while you try to fix a broken ceph cluster. Solutions are available <a href="troubleshooting_break_and_fix_solution.html" class="xref page">here</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#troubleshooting_break_and_fix">Ceph Break and Fix</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ceph_sizing_overview"><a class="anchor" href="#_ceph_sizing_overview"></a>8. Ceph Sizing Overview.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Check the following <a href="https://ibm.ent.box.com/file/1123832997880">Slides</a> that will give you a nice starting point for Ceph Sizing.</p>
+</div>
+<div class="paragraph">
+<p>Once you have covered the slides, you can try and do the
+<a href="https://ibm.ent.box.com/file/1129703050320?s=ka0ybf9tyd832s517fwzuriljd4d35tc">first sizing exercise</a>
+side by side with the step-by-step <a href="https://ibm.ent.box.com/file/1159312313422">solution guide</a></p>
+</div>
+<div class="paragraph">
+<p>We have a second
+<a href="https://ibm.box.com/s/obx9z8xpy9d6sn24z7tcgg83b5klhwhl">exercise</a>. The
+solution guide is available
+<a href="https://ibm.box.com/s/u71z61ulvlrnzz1oxfy5rt09mq6i06fk">here</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_ceph_benchmarking"><a class="anchor" href="#_ceph_benchmarking"></a>9. Ceph Benchmarking.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The following sections just walk you through some general benchmarking
+recommendations, and some popular tools you can use to benchmark Ceph.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="ceph_performance_example.html" class="xref page">Setting the Initial Baseline</a></p>
+</li>
+<li>
+<p><a href="ceph_performance_fio.html" class="xref page">Benchmarking Block &amp; File</a></p>
+</li>
+<li>
+<p><a href="#ceph_performance_object">Benchmarking Object Storage</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="navbar-item" href="https://www.redhat.com/en/technologies/cloud-computing/openshift-container-storage" target="_blank">
+      <img src="../_/img/header_logo.svg" alt="Ceph">
+  </a>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>

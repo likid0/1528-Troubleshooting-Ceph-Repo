@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Upgrade from RHCS 4.X to IBM Storage Ceph 5.3.X :: Ceph Top Gun Enablement</title>
+    <link rel="canonical" href="https://likid0.github.io/ceph-top-gun-enablement/training/ceph_upgrade_4_to_5.html">
+    <meta name="generator" content="Antora 3.1.2">
+    <link rel="stylesheet" href="../_/css/site.css">
+    <script>var uiRootPath = '../_'</script>
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank">
+          <img src="../_/img/header_logo_reverse.svg" height="48px" alt="Ceph">
+      </a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Get Help</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://access.redhat.com/documentation/zh-cn/red_hat_ceph_storage/5" target="_blank">Ceph Documentation</a>
+            <a class="navbar-item" href="https://bugzilla.redhat.com/describecomponents.cgi?product=Red%20Hat%20OpenShift%20Container%20Storage" target="_blank">Browse Bugs</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">Improve Guides</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/likid0/ceph-top-gun-enablement/issues/new/choose" target="_blank">Open Issue</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="#">More Infos</a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://www.redhat.com/en/blog/channel/red-hat-storage" target="_blank">Our Blog</a>
+            <a class="navbar-item" href="https://www.youtube.com/channel/UCoyG8VyvB-XUxQl1mD3T3Gw" target="_blank">Youtube</a>
+            <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank">Ceph Storage Technology</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container" data-component="training" data-version="master">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active" data-panel="menu">
+  <nav class="nav-menu">
+    <h3 class="title"><a href="index.html">Ceph Top-Gun Enablement</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Lab Setup</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="opentlc_lab_env.html">Opentlc Lab Env</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Core Ceph</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_introduction.html">Ceph Introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_architecture.html">Ceph Architecture</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cluster_partitioning.html">Ceph Cluster Partitioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_hardware.html">Ceph Hardware Recommendations</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deployment_intro.html">Ceph Install Methods </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cephadm_intro.html">Cephadm Orchestrator</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deploy_basic.html">Deploy Ceph with Cephadm</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deploy_ui.html">Deploy Ceph from the UI</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_dashboard_metrics.html">Ceph Dashboard Management &amp; Metrics</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cli_intro.html">Ceph CLI basic commands</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_configuration.html">Ceph Configuration</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_pools.html">Ceph storage pools config</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_pgs.html">Ceph Health and PGs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_bluestore.html">Ceph OSD Bluestore</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_recovery.html">Ceph OSD Failure/Recovery</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cephx.html">Rados CephX Auth/AuthZ</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_version.html">What version of Ceph am I running?</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deployment_challenge.html">Challenge Ceph Deployment</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph RADOS Block Device</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_intro.html">RADOS Block Device introduction</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_export.html">RBD Import/Export</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_mirroring.html">RBD Mirroring</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_challenge.html">Challenge RBD</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">CephFS Shared FileSystem</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephfs_intro.html">CephFS introduction &amp; Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephfs_advanced.html">CephFS Deep Dive</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cephfs_challenge.html">Challenge Cephfs</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph RadosGW</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_intro.html">RGW Introduction &amp; Deployment</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_arch_deep_dive.html">RGW Deep Dive</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_ha.html">RGW High Availability</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_ssl.html">RGW &amp; Ingress with SSL</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_users_quotas.html">RGW Users &amp; Quotas</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_auth.html">RGW Auth &amp; Authz</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_object_versioning.html">RGW S3 Object Versioning</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_placement_and_storage_classes.html">RGW Placement &amp; Storage Classes</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_life_cycle_management.html">RGW Life Cycle Management</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_bucket_policy.html">RGW S3 Bucket Policy</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_sts_introduction.html">RGW Secure Token Service</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_sts_bucket_role_policy.html">RGW Bucket vs Role Policy</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_multisite.html">RGW Multisite Replication</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_cloudsync.html">RGW Object Cloud Transition</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_archive.html">RGW Archive Zone</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_presignedurl.html">RGW presigned URL</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_opslog.html">RGW Opslog</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_bucket_notification.html">RGW bucket Notification</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="radosgw_object_lock.html">RGW Object Lock</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="MFA_object_delete.html">RGW MFA Delete</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_rgw_challenge.html">Challenge RGW</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Upgrades</span>
+<ul class="nav-list">
+  <li class="nav-item is-current-page" data-depth="1">
+    <a class="nav-link" href="ceph_upgrade_4_to_5.html">Ceph Upgrade from RHCS 4 to IBMCS 5.3</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph-upgrades_cephadm.html">Minor Version Upgrades with Cephadm</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Troubleshooting</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="troubleshooting_logging.html">Troubleshooting Logs Debug Mode</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="trouble-shooting-nearfull-osds.html">Troubleshooting nearfull OSDs</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="troubleshooting_bluestore.html">Troubleshooting Bluestore issues</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="trouble-shooting-large-omap-objects.html">Troubleshooting Large Omap Objects</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="troubleshooting_cephadm_device_ls.html">Troubleshooting Cephadm devcice ls </a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="troubleshooting_break_and_fix.html">Troubleshooting Break &amp; Fix Hands-on</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Benchmarking</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_performance_example.html">Setting the Inital Baseline</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_performance_fio.html">Benchmarking Ceph block and File</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_performance_object.html">Benchmarking Ceph Object(RGW)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Stretched</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="rhcs-stretched-deploy.html">Ceph Stretch Mode</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Ceph Challenge Solutions</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_deployment_challenge_solution.html">Ceph Deployment Solution</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="cephrbd_challenge_solution.html">Ceph RBD Solution</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_cephfs_challenge_solution.html">Ceph CephFS Solution</a>
+  </li>
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="ceph_rgw_challenge_solution.html">Ceph RGW Solution</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">Ceph Top-Gun Enablement</span>
+    <span class="version">master</span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="index.html">Ceph Top-Gun Enablement</a>
+      <ul class="versions">
+        <li class="version is-current is-latest">
+          <a href="index.html">master</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="index.html" class="home-link"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="index.html">Ceph Top-Gun Enablement</a></li>
+    <li>Ceph Upgrades</li>
+    <li><a href="ceph_upgrade_4_to_5.html">Ceph Upgrade from RHCS 4 to IBMCS 5.3</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="file:///antora/training/modules/ROOT/pages/ceph_upgrade_4_to_5.adoc">Edit this Page</a></div>
+</div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Upgrade from RHCS 4.X to IBM Storage Ceph 5.3.X</h1>
+<div class="sect1">
+<h2 id="_introduction"><a class="anchor" href="#_introduction"></a>1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this Lab, we will cover upgrading from RHCS4.3 to RHCS 5.3.</p>
+</div>
+<div class="paragraph">
+<p>We are also going to update the OS to the latest version of RHEL 8.X in the
+process.</p>
+</div>
+<div class="paragraph">
+<p>To complete this lab, we need to follow these high-level steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deploy RHCS4 in ceph-node and ceph-mon clusters</p>
+</li>
+<li>
+<p>Configure S3 multisite Replication</p>
+</li>
+<li>
+<p>Test Multisite replication with S3 client.</p>
+</li>
+<li>
+<p>Start Upgrade to RHCS5</p>
+</li>
+<li>
+<p>Updating the OS operating System</p>
+</li>
+<li>
+<p>Upgrading to RHCS5 with ceph-ansible</p>
+</li>
+<li>
+<p>Converting the Cluster to use cephadm</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Supported Configurations <a href="https://access.redhat.com/articles/1548993">KCS</a></p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>This Lab needs a Fresh deployment!!.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_preparing_for_the_upgrade"><a class="anchor" href="#_preparing_for_the_upgrade"></a>2. Preparing for the Upgrade</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Red Hat Ceph Storage 4.3 or later.</p>
+</li>
+<li>
+<p>Ansible 2.9.</p>
+</li>
+<li>
+<p>Ceph-ansible shipped with the latest version of Red Hat Ceph Storage.</p>
+</li>
+<li>
+<p>Red Hat Enterprise Linux 8.4 EUS or later.</p>
+</li>
+<li>
+<p>FileStore OSDs must be migrated to BlueStore.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>There is no direct upgrade path from Red Hat Ceph Storage versions earlier than Red Hat Ceph Storage 4.3. If upgrading from Red Hat Ceph Storage 3, you must first upgrade to Red Hat Ceph Storage 4.3 or later and then upgrade to Red Hat Ceph Storage 5.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You can only upgrade to the latest version of Red Hat Ceph Storage 5. For example, if version 5.1 is available, you cannot upgrade from 4 to 5.0; you must go directly to 5.1.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The upgrade process uses Ansible playbooks to upgrade a Red Hat Ceph Storage 4 storage cluster to Red Hat Ceph Storage 5. If your Red Hat Ceph Storage 4 cluster is non-containerized, the upgrade process includes a step to transform the cluster into a containerized version. Red Hat Ceph Storage 5 does not run on non-containerized clusters.</p>
+</div>
+<div class="paragraph">
+<p>Upgrade one cluster at a time if you have a mirroring or multisite configuration. Make sure that each upgraded cluster is running correctly before upgrading another cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_deploy_the_initial_rhcs4_cluster"><a class="anchor" href="#_deploy_the_initial_rhcs4_cluster"></a>3. Deploy the initial RHCS4 Cluster</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Before starting this section make sure you have run the following playbook on
+the workstation node:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ansible-playbook cephadmdeploy/ansible-cephadm-deploy/prepare-client.yaml -i workstation,</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_deploy_the_first_cluster_the_ceph_node_cluster_with_rhcs4"><a class="anchor" href="#_deploy_the_first_cluster_the_ceph_node_cluster_with_rhcs4"></a>3.1. Deploy the first cluster, the ceph-node cluster, with RHCS4</h3>
+<div class="paragraph">
+<p>We are going to run a playbook that won&#8217;t deploy RHCS4 but will get everything
+ready, repos, dns, ceph-ansible, etc.</p>
+</div>
+<div class="paragraph">
+<p>Add your RH network User/Pass.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># vi cephadmdeploy/ansible-cephadm-deploy/group_vars/all.yaml
+update_cluster_os: true
+dedicated_observability: true
+reg_password: 'REG_PASS'    &lt;--------- MODIFY
+reg_username: email@email.com    &lt;--------- MODIFY
+rhcs_subscription_username: email@redhat.com  &lt;--------- MODIFY
+rhcs_subscription_password: 'SUB_PASS'        &lt;--------- MODIFY
+hosts_add_ansible_managed_hosts: false
+dnsmasq_upstream_servers_ip: 150.239.16.12</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Then run the playbook.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ansible-playbook -i /root/cluster1 cephadmdeploy/ansible-cephadm-deploy/deploy-ceph-rhcs4.yaml -e zone_name=lab1 -e name_host=node</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the playbook finishes, ssh into our admin node <code>ceph-node01</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">ssh root@ceph-node01</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>ceph-ansible has already been deployed, and an inventory has been created for us</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># cat /usr/share/ceph-ansible/inventory
+[mons]
+ceph-node0[1:3].example.com
+
+[mgrs]
+ceph-node0[1:3].example.com
+
+[osds]
+ceph-node0[1:3].example.com
+
+[rgws]
+ceph-node0[1:3].example.com
+
+[grafana-server]
+proxy01.example.com</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Also, the group_var templates have been created. Please review and modify as
+needed:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ls -l /usr/share/ceph-ansible/group_vars/*.yaml
+-rw-r--r-- 1 root root 1521 Jul  4 02:57 /usr/share/ceph-ansible/group_vars/all.yaml
+-rw-r--r-- 1 root root  160 Jul  4 02:53 /usr/share/ceph-ansible/group_vars/osds.yaml
+-rw-r--r-- 1 root root  355 Jul  4 02:54 /usr/share/ceph-ansible/group_vars/rgws.yaml</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once you have modified the files to your needs, deploy the ceph cluster.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># cd /usr/share/ceph-ansible/
+# ansible-playbook -i inventory site-container.yml.sample</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once it has finished, you will have ceph running:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph -s
+  cluster:
+    id:     6191f79a-f21d-4b93-b70f-cdd2a974f216
+    health: HEALTH_WARN
+            mons are allowing insecure global_id reclaim
+
+  services:
+    mon: 3 daemons, quorum ceph-node01,ceph-node02,ceph-node03 (age 21h)
+    mgr: ceph-node03(active, since 20h), standbys: ceph-node02, ceph-node01
+    osd: 12 osds: 12 up (since 21h), 12 in (since 21h)
+
+  data:
+    pools:   7 pools, 80 pgs
+    objects: 479 objects, 14 KiB
+    usage:   12 GiB used, 108 GiB / 120 GiB avail
+    pgs:     80 active+clean
+
+  io:
+    client:   11 KiB/s rd, 0 B/s wr, 10 op/s rd, 10 op/s wr</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>RGWs will be down. This is normal, as we need to finish the multisite
+configuration.</p>
+</div>
+<div class="paragraph">
+<p>We provide a file <code>/usr/share/ceph-ansible/group_vars/multisite.txt</code> to simplify the multisite configuration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># cat /usr/share/ceph-ansible/group_vars/multisite.txt
+REALM="train"
+ZONEGROUP="lab"
+MASTER_ZONE="lab1"
+SECONDARY_ZONE="lab2"
+ENDPOINTS_MASTER_ZONE="http://ceph-node01.example.com:8080,http://ceph-node02.example.com:8080"
+URL_MASTER_ZONE="http://ceph-node01.example.com:8080"
+ENDPOINTS_SECONDARY_ZONE="http://ceph-mon01.example.com:8080,http://ceph-mon02.example.com:8080"
+URL_SECONDARY_ZONE="http://ceph-mon01:8080"
+SYNC_USER="sync-user"
+SYSTEM_ACCESS_KEY="synckey"
+SYSTEM_SECRET_KEY="synckey"
+
+
+#radosgw-admin realm create --rgw-realm=${REALM} --default
+#radosgw-admin zonegroup create --rgw-zonegroup=${ZONEGROUP} --endpoints=${ENDPOINTS_MASTER_ZONE} --rgw-realm=${REALM} --master --default
+#radosgw-admin zone create --rgw-zonegroup=${ZONEGROUP} --rgw-zone=${MASTER_ZONE} --endpoints=${ENDPOINTS_MASTER_ZONE} --master --default
+#radosgw-admin user create --uid=${SYNC_USER} --display-name="Synchronization User" --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY} --system
+#radosgw-admin zone modify --rgw-zone=${MASTER_ZONE} --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY}
+#radosgw-admin period update --commit
+
+#radosgw-admin realm pull --url=${URL_MASTER_ZONE} --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY} --rgw-realm=${REALM}
+#radosgw-admin realm default --rgw-realm=${REALM}
+#radosgw-admin period pull --url=${URL_MASTER_ZONE} --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY}
+#radosgw-admin zone create --rgw-zonegroup=${ZONEGROUP} --rgw-zone=${SECONDARY_ZONE} --endpoints=${ENDPOINTS_SECONDARY_ZONE} --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY}
+#radosgw-admin period update --commit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We just need to source the file to get the VARS in place and then run the
+the first block of commands:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># source /usr/share/ceph-ansible/group_vars/multisite.txt
+#
+radosgw-admin realm create --rgw-realm=${REALM} --default
+radosgw-admin zonegroup create --rgw-zonegroup=${ZONEGROUP} --endpoints=${ENDPOINTS_MASTER_ZONE} --rgw-realm=${REALM} --master --default
+radosgw-admin zone create --rgw-zonegroup=${ZONEGROUP} --rgw-zone=${MASTER_ZONE} --endpoints=${ENDPOINTS_MASTER_ZONE} --master --default
+radosgw-admin user create --uid=${SYNC_USER} --display-name="Synchronization User" --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY} --system
+radosgw-admin zone modify --rgw-zone=${MASTER_ZONE} --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY}
+radosgw-admin period update --commit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>After that, our RGW daemons should start up.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph -s | grep rgw
+    rgw: 3 daemons active (ceph-node01.rgw0, ceph-node02.rgw0, ceph-node03.rgw0)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_the_first_cluster_the_ceph_mon_cluster_with_rhcs4"><a class="anchor" href="#_deploy_the_first_cluster_the_ceph_mon_cluster_with_rhcs4"></a>3.2. Deploy the first cluster, the ceph-mon cluster, with RHCS4</h3>
+<div class="paragraph">
+<p>Prepare the nodes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ansible-playbook -i /root/cluster2 cephadmdeploy/ansible-cephadm-deploy/deploy-ceph-rhcs4.yaml -e zone_name=lab2  -e name_host=mon</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>From the <code>admin</code> node <code>ceph-mon01</code> deploy the RHCS4 cluster on site2</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ssh root@ceph-mon01
+# cd /usr/share/ceph-ansible/
+# ansible-playbook -i inventory site-container.yml.sample</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once deployed, finalize the Multisite Sync.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># source /usr/share/ceph-ansible/group_vars/multisite.txt
+#
+# radosgw-admin realm pull --url=${URL_MASTER_ZONE} --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY} --rgw-realm=${REALM}
+# radosgw-admin realm default --rgw-realm=${REALM}
+# radosgw-admin period pull --url=${URL_MASTER_ZONE} --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY}
+# radosgw-admin zone create --rgw-zonegroup=${ZONEGROUP} --rgw-zone=${SECONDARY_ZONE} --endpoints=${ENDPOINTS_SECONDARY_ZONE} --access-key=${SYSTEM_ACCESS_KEY} --secret=${SYSTEM_SECRET_KEY}
+# radosgw-admin period update --commit</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Our RGWs should start up.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph -s | grep rgw
+    rgw: 3 daemons active (ceph-mon01.rgw0, ceph-mon02.rgw0, ceph-mon03.rgw0)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And the cluster should be in sync.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># radosgw-admin sync status
+
+          realm b23a4e06-70e5-453b-8cf0-fd8a5c010506 (train)
+      zonegroup 05c0db90-c6dc-4b76-8e2f-0b04e41d2204 (lab)
+           zone a7c1cf2b-b2bc-4a22-a414-e2c6e35f928f (lab2)
+  metadata sync syncing
+                full sync: 0/64 shards
+                incremental sync: 64/64 shards
+                metadata is caught up with master
+      data sync source: 71fd8852-fe6c-4371-b175-6bb75cebb7a9 (lab1)
+                        syncing
+                        full sync: 0/128 shards
+                        incremental sync: 128/128 shards
+                        data is caught up with source</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_quick_test_to_check_rgws3_is_working"><a class="anchor" href="#_quick_test_to_check_rgws3_is_working"></a>4. Quick Test to check RGW/S3 is working</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We are going to configure the AWS CLI client to upload some objects and double
+check that the replication between sites is working ok.</p>
+</div>
+<div class="paragraph">
+<p>Create test user</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># radosgw-admin user create --uid=test --display-name="Test User" --access-key=test --secret=test
+{
+    "user_id": "test",
+    "display_name": "Test User",
+    "email": "",
+    "suspended": 0,
+    "max_buckets": 1000,
+    "subusers": [],
+    "keys": [
+        {
+            "user": "test",
+            "access_key": "test",
+            "secret_key": "test"
+        }
+    ],
+    "swift_keys": [],
+    "caps": [],
+    "op_mask": "read, write, delete",
+    "default_placement": "",
+    "default_storage_class": "",
+    "placement_tags": [],
+    "bucket_quota": {
+        "enabled": false,
+        "check_on_raw": false,
+        "max_size": -1,
+        "max_size_kb": 0,
+        "max_objects": -1
+    },
+    "user_quota": {
+        "enabled": false,
+        "check_on_raw": false,
+        "max_size": -1,
+        "max_size_kb": 0,
+        "max_objects": -1
+    },
+    "temp_url_keys": [],
+    "type": "rgw",
+    "mfa_ids": []
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s configure the AWS client and upload a file to the ceph-node cluster.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># aws configure
+AWS Access Key ID [None]: test
+AWS Secret Access Key [None]: test
+Default region name [None]: lab
+Default output format [None]: json
+# aws --endpoint http://ceph-node01.example.com:8080 s3 ls
+# aws --endpoint http://ceph-node01.example.com:8080 s3 mb s3://testbucket
+make_bucket: testbucket
+# aws --endpoint http://ceph-node01.example.com:8080 s3 cp /etc/hosts s3://testbucket
+upload: ../etc/hosts to s3://testbucket/hosts</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If we now check using the ceph-mon cluster endpoint, you can see the object has
+been replicated, and everything is working as expected.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># aws --endpoint http://ceph-mon01.example.com:8080 s3 ls s3://testbucket
+2023-07-05 03:42:54       1330 hosts
+# aws --endpoint http://ceph-mon01.example.com:8080 s3 cp /etc/resolv.conf s3://testbucket/resolv.conf
+upload: ../etc/resolv.conf to s3://testbucket/resolv.conf
+# aws --endpoint http://ceph-node01.example.com:8080 s3 ls s3://testbucket
+2023-07-05 03:42:54       1330 hosts
+2023-07-05 03:46:04        119 resolv.conf</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once we have confirmed it is working, we can move into upgrading RHCS.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_minor_upgrade_to_4_3_latest"><a class="anchor" href="#_minor_upgrade_to_4_3_latest"></a>5. Minor upgrade to 4.3 Latest.</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In our deployment, we are already running 4.3 latest we can check in this <a href="https://access.redhat.com/solutions/2045583">link</a></p>
+</div>
+<div class="paragraph">
+<p>The latest 4 version is:</p>
+</div>
+<div class="paragraph">
+<p>Nautilus	Red Hat Ceph Storage 4.3z1 - 4.3.1	14.2.22-128.el8cp	14.2.22-128.el7cp	ceph-ansible-4.0.70.18-1	September, 2022	4-195</p>
+</div>
+<div class="paragraph">
+<p>If we check on our cluster, we can see we are on the latest version:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">[root@ceph-mon01 ~]# ceph versions
+{
+    "mon": {
+        "ceph version 14.2.22-128.el8cp (40a2bf9c4e79e39754d69a95cd51bd60991284be) nautilus (stable)": 3
+    },
+    "mgr": {
+        "ceph version 14.2.22-128.el8cp (40a2bf9c4e79e39754d69a95cd51bd60991284be) nautilus (stable)": 3
+    },
+    "osd": {
+        "ceph version 14.2.22-128.el8cp (40a2bf9c4e79e39754d69a95cd51bd60991284be) nautilus (stable)": 3
+    },
+    "mds": {},
+    "rgw": {
+        "ceph version 14.2.22-128.el8cp (40a2bf9c4e79e39754d69a95cd51bd60991284be) nautilus (stable)": 1
+    },
+    "overall": {
+        "ceph version 14.2.22-128.el8cp (40a2bf9c4e79e39754d69a95cd51bd60991284be) nautilus (stable)": 10
+    }
+}
+# rpm -qa | grep ceph-ansible
+ceph-ansible-4.0.70.18-1.el8cp.noarch</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_backup_important_files_before_we_start_the_upgrade"><a class="anchor" href="#_backup_important_files_before_we_start_the_upgrade"></a>6. Backup important files before we start the upgrade</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Procedure</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make a backup copy of the /etc/ceph and /var/lib/ceph folders.</p>
+</li>
+<li>
+<p>Make a backup copy of the ceph.client.admin.keyring file.</p>
+</li>
+<li>
+<p>Make backup copies of the ceph.conf files from each node.</p>
+</li>
+<li>
+<p>Make backup copies of the /etc/ganesha/ folder on each node.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_updating_the_host_operating_system"><a class="anchor" href="#_updating_the_host_operating_system"></a>7. Updating the host operating system</h2>
+<div class="sectionbody">
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Red Hat Ceph Storage 5 supports container-based deployments only. A cluster needs to be containerized before upgrading to RHCS 5.x.</p>
+</div>
+<div class="paragraph">
+<p>If you are running a non-container-based deployment of Ceph, you need to follow
+the next steps detailed in the upgrade
+<a href="https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/5/html/upgrade_guide/upgrading-a-red-hat-ceph-storage-cluster-running-rhel-8-from-rhcs-4-to-rhcs-5#converting-to-a-containerized-deployment_assembly_upgrading-a-red-hat-ceph-storage-cluster-running-rhel-8-from-rhcs-4-to-rhcs-5">doc</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>We are going to upgrade the OS from RHEL 8.4 to 8.9. This kind of upgrade can
+be done with YUM, so no leapp upgrade is needed, but it would be done in the same
+fashion.</p>
+</div>
+<div class="paragraph">
+<p>We update OS from the hosts one by one. You would repeat the same steps for
+each node in the cluster.</p>
+</div>
+<div class="paragraph">
+<p>We are going to start on our second site cluster, <code>ceph-mon</code>.</p>
+</div>
+<div class="paragraph">
+<p>Set the OSD nobackfill, norecover, norrebalance, noscrub and nodeep-scrub flags to avoid unnecessary load on the cluster and to avoid any data reshuffling when the node goes down for migration.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">ceph osd set nobackfill
+ceph osd set norecover
+ceph osd set norebalance
+ceph osd set noscrub
+ceph osd set nodeep-scrub</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run the yum update command on the node.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># cat /etc/redhat-release
+Red Hat Enterprise Linux release 8.4 (Ootpa)
+[root@ceph-mon01 ~]# yum update -y
+...
+Transaction Summary
+======================================================================================================================================================================================================================
+Install   10 Packages
+Upgrade  345 Packages
+Remove     3 Packages
+
+Total download size: 571 M</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the upgrade OS finishes for the first node ceph-node01, we will reboot the
+node, we need to make sure that all the Ceph daemons are running on ceph-node01,
+can be stopped without affecting the production traffic.</p>
+</div>
+<div class="paragraph">
+<p>For example, if we take the RGW daemon, we need to be sure that we have other
+RGW daemons are running on the cluster, and we have a LoadBalancer configured
+so that it will discover the RGW on node01 is down and not send the request to that
+RGW.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># shutdown -r now</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the node boots, we can check it has started all of the Ceph services ok,
+and that all the OSDs are up and running.</p>
+</div>
+<div class="paragraph">
+<p>Then we can remove the maintenance flags.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph osd tree
+ID CLASS WEIGHT  TYPE NAME           STATUS REWEIGHT PRI-AFF
+-1       0.02939 root default
+-3       0.00980     host ceph-mon01
+ 1   hdd 0.00980         osd.1           up  1.00000 1.00000
+-5       0.00980     host ceph-mon02
+ 0   hdd 0.00980         osd.0           up  1.00000 1.00000
+-7       0.00980     host ceph-mon03
+ 2   hdd 0.00980         osd.2           up  1.00000 1.00000
+
+# ceph osd unset noout
+# ceph osd unset nobackfill
+# ceph osd unset norecover
+# ceph osd unset norebalance
+# ceph osd unset noscrub
+# ceph osd unset nodeep-scrub</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And finally, check that all PGs are in <code>active+runnig</code> state</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph -s | grep pgs
+    pools:   10 pools, 176 pgs
+    pgs:     176 active+clean</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You will need to repeat the same steps for each node in the cluster.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_upgrading_rhcs_to_version_5_3"><a class="anchor" href="#_upgrading_rhcs_to_version_5_3"></a>8. Upgrading RHCS to version 5.3</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Now that we have all the nodes in <code>ceph-mon</code> cluster in RHEL 8.7 we can proceed
+with the upgrade of RHCS to version 5.3 using <code>ceph-ansible</code> rolling upgrade
+playbook</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Red Hat Ceph Storage 5 supports only containerized deployments.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>On the admin node ceph-mon01, we enable the ceph5 repo and disable the ceph4 repo.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># subscription-manager repos --enable=rhceph-5-tools-for-rhel-8-x86_64-rpms --disable=rhceph-4-tools-for-rhel-8-x86_64-rpms</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Update Ceph-ansible and Ansible:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># dnf update -y ansible ceph-ansible</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now it&#8217;s a moment to inspect the all.yaml and check/modify parameters that have
+been deprecated or new parameters that have been added in RHCS5, for example:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">File</th>
+<th class="tableblock halign-center valign-top">Ansible var</th>
+<th class="tableblock halign-center valign-top">Operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">inventory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">ceph-grafana</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Changed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">osds.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">osd_scenario</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Removed in 4.X</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">monitoring_group_name</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Changed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">fetch_directory</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Removed in 4.X</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">mon_use_fqdn</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Removed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">grafana_server_group_name</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Removed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">monitoring_group_name</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Added</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">mds_use_fqdn</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Removed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">radosgw_frontend_ssl_certificate_data</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Added</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">prometheus_frontend_vip</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Added</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">alertmanager_frontend_vip</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Added</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">grafana_conf_overrides</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Added</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">prometheus_conf_overrides</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Added</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">alertmanager_conf_overrides</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Added</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">prometheus_storage_tsdb_retention_time</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Added</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><p class="tableblock">all.yml</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">use_fqdn_yes_i_am_sure</p></td>
+<td class="tableblock halign-center valign-top"><p class="tableblock">Removed</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Check the <code>all.yaml</code> from our previous RHCS 4 config and the <code>all.yml.sample</code> file from the new RHCS5 deployment.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ls -l /usr/share/ceph-ansible/group_vars/all*
+-rwxr--r-- 1 root root  1533 Jul  5 10:51 /usr/share/ceph-ansible/group_vars/all.yaml
+-rw-r--r-- 1 root root 31176 May  2 15:05 /usr/share/ceph-ansible/group_vars/all.yml.sample</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this hands-on lab, we will only modify three lines in the all.yaml file,
+we change the ceph_docker_image to use the rhceph-5 image, and we add upgrade_ceph_packages: True</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># diff /usr/share/ceph-ansible/group_vars/all.yaml /usr/share/ceph-ansible/group_vars/all.yaml.rhcs4
+6c6
+&lt; ceph_docker_image: rhceph/rhceph-5-rhel8
+---
+&gt; ceph_docker_image: rhceph/rhceph-4-rhel8
+8d7
+&lt; upgrade_ceph_packages: True</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If we have a weak password in the <code>dashboard_admin_password</code> parameter, the upgrade to RHCS 5 will fail as the dashboard create user module fails to create a user. For further information, check the <a href="https://docs.ceph.com/en/latest/mgr/dashboard/#password-policy">Ceph dashboard password policy</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">cd /usr/share/ceph-ansible/
+# ansible-playbook -i inventory infrastructure-playbooks/rolling_update.yml --extra-vars "health_osd_check_retries=50 health_osd_check_delay=30"</code></pre>
+</div>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>During the upgrade to RHCS 5.0, the autoscale pool option for each pool will be set to whatever value is set in the ceph config parameter called <code>osd_pool_default_pg_autoscale_mode</code>, by default, the value of the parameter is set to ON. This means that Ceph will automatically change the number of PGs as it sees fit, so it is crucial to change the <code>osd_pool_default_pg_autoscale_mode</code> parameter to WARN or set the autoscale ratio correctly on all pools before running the upgrade.</p>
+</div>
+<div class="paragraph">
+<p>An example of how to modify the <code>osd_pool_default_pg_autoscale_mode</code> to warn before starting the upgrade from RHCS 4 to RHCS 5:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-ruby hljs" data-lang="ruby">$ ceph config get mon osd_pool_default_pg_autoscale_mode
+on
+$ ceph config set mon osd_pool_default_pg_autoscale_mode warn
+$ ceph config get mon osd_pool_default_pg_autoscale_mode
+warn</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>After the playbook finishes, Verify our current Ceph version:</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>In the following <a href="https://access.redhat.com/solutions/2045583">KCS</a>, we can find Red Hat Ceph Storage releases and corresponding Ceph package versions.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The output of your command will vary depending on the container image tag being
+used, but you should be in some version of Pacific.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph versions
+{
+    "mon": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 3
+    },
+    "mgr": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 3
+    },
+    "osd": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 3
+    },
+    "mds": {},
+    "rgw": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 3
+    },
+    "overall": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 12
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_verify_that_the_rgw_multisite_replication_keeps_working_as_expected"><a class="anchor" href="#_verify_that_the_rgw_multisite_replication_keeps_working_as_expected"></a>9. Verify That the RGW multisite replication keeps working as expected</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s upload some objects to the testbucket.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># for i in {1..100};do aws --endpoint http://ceph-mon01.example.com:8080 s3 cp /etc/resolv.conf s3://testbucket/file${i} ;done
+# aws --endpoint http://ceph-node01.example.com:8080 s3 ls s3://testbucket
+
+# for i in {1..100};do aws --endpoint http://ceph-node01.example.com:8080 s3 cp # /etc/resolv.conf s3://testbucket/2file${i};done
+# aws --endpoint http://ceph-mon01.example.com:8080 s3 ls s3://testbucket</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adopt_the_ceph_cluster_with_cephadm"><a class="anchor" href="#_adopt_the_ceph_cluster_with_cephadm"></a>10. Adopt the Ceph cluster with Cephadm</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>There is a playbook available in ceph-ansible to adopt your ceph cluster.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Before adopting the cluster with <code>cephadm</code>, we need the latest podman version available on all the ceph nodes. Hence, you are at least in a podman version 3.X, which is compatible with the Ceph upstream Pacific release.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ podman --version
+podman version 4.2.0</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>The adoption playbook will import into <code>cephadm</code> the following services:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>MONs.</p>
+</li>
+<li>
+<p>MGRs.</p>
+</li>
+<li>
+<p>OSDs.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Also, the adoption playbook will recreate the following services:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>MDSs.</p>
+</li>
+<li>
+<p>RGWs:</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>When adopting each service, it will remove the old <code>systemd</code> unit, and create a new <code>systemd</code> unit managed by <code>cephadm</code>. One by one it will stop and start the <code>podman</code> containers, and the name will change into a new <code>cephadm</code> friendly name.</p>
+</li>
+<li>
+<p>all the configuration will be moved into <code>/var/lib/ceph/${cluster_fsid}/</code>.</p>
+</li>
+<li>
+<p>The <code>ceph.conf</code> config file is individual for each Ceph service and stored at <code>/var/lib/ceph/${cluster_fsid}/${service}/config</code>.</p>
+</li>
+<li>
+<p>Ceph log files are now stored at <code>/var/log/ceph/${cluster_fsid}/</code>.</p>
+</li>
+<li>
+<p>The <code>systemd</code> units created by <code>cephadm</code> to run the Ceph services on the node, use the start script located at <code>/var/lib/ceph/${cluster_fsid}/${service}/unit.run</code>.</p>
+</li>
+<li>
+<p>An overall <code>ceph.target</code> unit is created to start/stop all Ceph services.</p>
+</li>
+<li>
+<p>A logrotate file at <code>/etc/logrotate.d/ceph-${cluster_fsid}</code> is created in case logging to files is enabled.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Currently, there is a bug:
+<a href="https://bugzilla.redhat.com/show_bug.cgi?id=2207872">2207872</a> That creates an error when running the adopt playbook
+with Error: <code>The conditional check 'cephadm_mgmt_network is ansible.utils.ipv4' failed.</code>
+<a href="https://access.redhat.com/solutions/7015843">KCS</a></p>
+</div>
+<div class="paragraph">
+<p>Workaround install ansible utils.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ansible-galaxy collection install ansible.utils</code></pre>
+</div>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Run the command to start the adopt playbook:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">#  ansible-playbook -i inventory infrastructure-playbooks/cephadm-adopt.yml  --extra-vars "ceph_origin=distro"
+TASK [inform users about cephadm] ************************************************************************************************************************************************************************************************************************************************
+Wednesday 12 July 2023  08:42:56 -0400 (0:00:01.998)       0:07:21.042 ********
+ok: [ceph-node01.example.com] =&gt;
+  msg: |-
+    This Ceph cluster is now managed by cephadm. Any new changes to the
+    cluster need to be achieved by using the cephadm CLI, and you don't
+    need to use ceph-ansible playbooks anymore.
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************************************************
+ceph-node01.example.com    : ok=95   changed=24   unreachable=0    failed=0    skipped=43   rescued=0    ignored=0
+ceph-node02.example.com    : ok=51   changed=19   unreachable=0    failed=0    skipped=40   rescued=0    ignored=0
+ceph-node03.example.com    : ok=51   changed=19   unreachable=0    failed=0    skipped=40   rescued=0    ignored=0
+localhost                  : ok=1    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+proxy01.example.com        : ok=39   changed=22   unreachable=0    failed=0    skipped=21   rescued=0    ignored=0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the <code>ceph-ansible</code> playbook has finished, we need to check with the <code>ceph orch status</code> command that <code>cephadm</code> is managing the Ceph cluster:
+TIP: To run Ceph commands, we must start using the <code>cephadm shell</code> command. Also, we can use the <code>cephadm enter</code> command to enter a running service container or the <code>cephadm run</code> command to start a service in the foreground.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ cephadm shell ceph orch status
+Backend: cephadm
+Available: Yes
+Paused: No</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Using the <code>ceph orch ls</code> command, we can see a brief description of the Ceph services managed by <code>cephadm</code>:</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The OSDs will be shown as <code>osd.unmanaged</code> in the <code>ceph orch ls</code> command. This is the expected behaviour for adopted OSDs from previous versions that are not using drive groups. We can get further information at the following <a href="https://tracker.ceph.com/issues/46541">upstream issue</a>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ cephadm shell ceph orch ls
+NAME           RUNNING  REFRESHED  AGE  PLACEMENT
+alertmanager       1/1  3m ago     10m  count:1;label:monitoring
+crash              3/3  9m ago     10m  label:ceph
+grafana            1/1  3m ago     10m  count:1;label:monitoring
+mgr                3/3  9m ago     10m  count:3;label:mgrs
+mon                3/3  9m ago     10m  count:3;label:mons
+node-exporter      3/3  9m ago     10m  *
+osd.unmanaged      6/6  9m ago     -    &lt;unmanaged&gt;
+prometheus         1/1  3m ago     10m  count:1;label:monitoring</code></pre>
+</div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+If something in the output after deployment is not running like expected, check the <code>cephadm</code> logs for each host at <code>/var/log/ceph/cephadm.log</code>. You can also use the following command to print recent events: <code>$ cephadm shell ceph log last cluster</code>
+TIP: To configure <code>DEBUG</code> mode in the <code>cephadm</code> logs use. <code>$ cephadm shell ceph config set mgr mgr/cephadm/log_to_cluster_level debug &amp;&amp; cephadm shell ceph -W cephadm --watch-debug</code>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Again test if RadosGW multisite is working as expected:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># for i in {1..10};do aws --endpoint http://ceph-mon01.example.com:8080 s3 cp /etc/resolv.conf s3://testbucket/newfile${i};done
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile1
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile2
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile3
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile4
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile5
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile6
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile7
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile8
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile9
+upload: ../../../etc/resolv.conf to s3://testbucket/newfile10</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>With this, we now have our <code>ceph-mon</code> cluster running version RHCS 5.3z3 , we
+can now move into upgrading the primary cluster <code>ceph-node</code></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_update_the_primary_cluster_ceph_cluster_ceph_node_from_rhcs4_to_rhcs5"><a class="anchor" href="#_update_the_primary_cluster_ceph_cluster_ceph_node_from_rhcs4_to_rhcs5"></a>11. Update the primary cluster Ceph Cluster <code>ceph-node</code> from RHCS4 to RHCS5</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>We are going to skip these steps as they are the same as with the
+<code>ceph-mon</code> cluster, you end up with all the services in the cluster running
+5.3/</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">[root@ceph-node01]# ceph versions
+{
+    "mon": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 3
+    },
+    "mgr": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 3
+    },
+    "osd": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 12
+    },
+    "mds": {},
+    "rgw": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 3
+    },
+    "overall": {
+        "ceph version 16.2.10-172.el8cp (00a157ecd158911ece116ae43095de793ed9f389) pacific (stable)": 21
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And also we adopt the <code>ceph-node</code> cluster.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">ansible-playbook -i inventory infrastructure-playbooks/cephadm-adopt.yml  --extra-vars "ceph_origin=distro"
+...
+TASK [inform users about cephadm] ************************************************************************************************************************************************************************************************************************************************
+Wednesday 12 July 2023  09:09:05 -0400 (0:00:02.299)       0:05:45.767 ********
+ok: [ceph-mon01.example.com] =&gt;
+  msg: |-
+    This Ceph cluster is now managed by cephadm. Any new changes to the
+    cluster need to be achieved by using the cephadm CLI, and you don't
+    need to use ceph-ansible playbooks anymore.
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************************************************************************************
+ceph-mon01.example.com     : ok=95   changed=24   unreachable=0    failed=0    skipped=43   rescued=0    ignored=0
+ceph-mon02.example.com     : ok=51   changed=19   unreachable=0    failed=0    skipped=40   rescued=0    ignored=0
+ceph-mon03.example.com     : ok=51   changed=19   unreachable=0    failed=0    skipped=40   rescued=0    ignored=0
+localhost                  : ok=1    changed=1    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
+proxy02.example.com        : ok=39   changed=22   unreachable=0    failed=0    skipped=21   rescued=0    ignored=0</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Final check for multisite sync.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># for i in {1..10};do aws --endpoint http://ceph-mon01.example.com:8080 s3 cp /etc/resolv.conf s3://testbucket/2newfile${i};done</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We have finished the Red Hat side of the upgrade. Now we need to move from RHCS
+into IBM Storage Ceph</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_upgrading_from_rhcs_5_to_ibm_storage_ceph_5"><a class="anchor" href="#_upgrading_from_rhcs_5_to_ibm_storage_ceph_5"></a>12. Upgrading from RHCS 5 to IBM Storage Ceph 5</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Enable the ceph-tools repository forRed Hat Enterprise Linux 8</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># for i in ceph-node01 ceph-node02 ceph-node03 proxy01 ; do ssh $i 'curl https://public.dhe.ibm.com/ibmdl/export/pub/storage/ceph/ibm-storage-ceph-5-rhel-9.repo |  tee /etc/yum.repos.d/ibm-storage-ceph-5-rhel-9.repo' ; done</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Disable the Red Hat Ceph Storage ceph-tools repository.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># yum repolist
+Updating Subscription Management repositories.
+repo id                                                                                                                        repo name
+ansible-2.9-for-rhel-8-x86_64-rpms                                                                                             Red Hat Ansible Engine 2.9 for RHEL 8 x86_64 (RPMs)
+ibm-storage-ceph-5                                                                                                             ibm-storage-ceph-5
+rhceph-5-tools-for-rhel-8-x86_64-rpms                                                                                          Red Hat Ceph Storage Tools 5 for RHEL 8 x86_64 (RPMs)
+rhel-8-for-x86_64-appstream-rpms                                                                                               Red Hat Enterprise Linux 8 for x86_64 - AppStream (RPMs)
+rhel-8-for-x86_64-baseos-rpms                                                                                                  Red Hat Enterprise Linux 8 for x86_64 - BaseOS (RPMs)
+
+# for i in ceph-node01 ceph-node02 ceph-node03 proxy01 ; do ssh $i 'yum-config-manager --disable rhceph-5-tools-for-rhel-8-x86_64-rpms' ; done
+Warning: Permanently added 'ceph-node01,172.16.7.61' (ECDSA) to the list of known hosts.
+Updating Subscription Management repositories.
+Repository ibm-storage-ceph-5 is listed more than once in the configuration
+Warning: Permanently added 'ceph-node02,172.16.7.62' (ECDSA) to the list of known hosts.
+Updating Subscription Management repositories.
+Warning: Permanently added 'ceph-node03,172.16.7.63' (ECDSA) to the list of known hosts.
+Updating Subscription Management repositories.
+Warning: Permanently added 'proxy01,172.16.7.24' (ECDSA) to the list of known hosts.
+Updating Subscription Management repositories.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add a license to install IBM Storage Ceph and click Accept on all nodes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># for i in ceph-node01 ceph-node02 ceph-node03 proxy01 ; do ssh $i 'dnf install ibm-storage-ceph-license -y ' ; done
+# for i in ceph-node01 ceph-node02 ceph-node03 proxy01 ; do ssh $i touch /usr/share/ibm-storage-ceph-license/accept ; done</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We need to reinstall cephadm, and then remove the ansible 2.9 package so
+ansible-core gets installed as a dependency for cephadm-ansible.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># dnf reinstall cephadm -y
+# dnf remove ansible -y
+# dnf install cephadm-ansible -y</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run the pre-flight playbook with ceph_origin=ibm</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># cd /usr/share/cephadm-ansible/
+# ansible-playbook -i /usr/share/ceph-ansible/inventory cephadm-preflight.yml --extra-vars "ceph_origin=ibm upgrade_ceph_packages=true"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph osd set noout
+noout is set
+# ceph osd set noscrub
+noscrub is set
+# ceph osd set nodeep-scrub
+nodeep-scrub is set</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We now need to configure cephadm to use the IBM container image registry</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph cephadm registry-login cp.icr.io username password</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The user is <code>cp</code> and the password is a token/key you will need to generate in
+IBM: <a href="https://www.ibm.com/docs/en/storage-fusion/2.2?topic=prerequisites-obtaining-entitlement-key" class="bare">https://www.ibm.com/docs/en/storage-fusion/2.2?topic=prerequisites-obtaining-entitlement-key</a></p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Check service versions and the available target containers:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph orch upgrade check cp.icr.io/cp/ibm-ceph/ceph-5-rhel8:latest</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Upgrade the storage cluster:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph orch upgrade start cp.icr.io/cp/ibm-ceph/ceph-5-rhel8:latest
+Initiating upgrade to cp.icr.io/cp/ibm-ceph/ceph-5-rhel8:latest
+# ceph -s
+  cluster:
+    id:     6191f79a-f21d-4b93-b70f-cdd2a974f216
+    health: HEALTH_WARN
+            mons are allowing insecure global_id reclaim
+            noout,noscrub,nodeep-scrub flag(s) set
+
+  services:
+    mon: 3 daemons, quorum ceph-node01,ceph-node02,ceph-node03 (age 10h)
+    mgr: ceph-node01(active, since 10h), standbys: ceph-node02, ceph-node03
+    osd: 12 osds: 12 up (since 10h), 12 in (since 40h)
+         flags noout,noscrub,nodeep-scrub
+    rgw: 3 daemons active (3 hosts, 1 zones)
+
+  data:
+    pools:   8 pools, 225 pgs
+    objects: 663 objects, 32 KiB
+    usage:   2.1 GiB used, 118 GiB / 120 GiB avail
+    pgs:     225 active+clean
+
+  io:
+    client:   511 B/s rd, 0 op/s rd, 0 op/s wr
+
+  progress:
+    Upgrade to 16.2.10-172.el8cp (3s)
+      [............................]
+
+# ceph orch upgrade status
+{
+    "target_image": "cp.icr.io/cp/ibm-ceph/ceph-5-rhel8@sha256:7789c46fd770642b5794c5d7a39a7039b47665fa5a62ee8a2156e783020cae73",
+    "in_progress": true,
+    "which": "Upgrading all daemon types on all hosts",
+    "services_complete": [
+        "osd",
+        "mgr",
+        "mon",
+        "crash"
+    ],
+    "progress": "21/31 daemons upgraded",
+    "message": "Currently upgrading rgw daemons"</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Once the upgrade has finished, we can check all containers are running IBM images</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># podman ps
+CONTAINER ID  IMAGE                                                                                                       COMMAND               CREATED         STATUS             PORTS       NAMES
+35a053bf4bb1  cp.icr.io/cp/ibm-ceph/ceph-5-rhel8@sha256:7789c46fd770642b5794c5d7a39a7039b47665fa5a62ee8a2156e783020cae73  -n mgr.ceph-node0...  12 minutes ago  Up 12 minutes ago              ceph-6191f79a-f21d-4b93-b70f-cdd2a974f216-mgr-ceph-node01
+a9b7df614632  cp.icr.io/cp/ibm-ceph/ceph-5-rhel8@sha256:7789c46fd770642b5794c5d7a39a7039b47665fa5a62ee8a2156e783020cae73  -n mon.ceph-node0...  12 minutes ago  Up 12 minutes ago              ceph-6191f79a-f21d-4b93-b70f-cdd2a974f216-mon-ceph-node01
+daabd638bc81  cp.icr.io/cp/ibm-ceph/ceph-5-rhel8@sha256:7789c46fd770642b5794c5d7a39a7039b47665fa5a62ee8a2156e783020cae73  -n client.crash.c...  11 minutes ago  Up 11 minutes ago              ceph-6191f79a-f21d-4b93-b70f-cdd2a974f216-crash-ceph-node01
+44b8a6dd82d7  cp.icr.io/cp/ibm-ceph/ceph-5-rhel8@sha256:7789c46fd770642b5794c5d7a39a7039b47665fa5a62ee8a2156e783020cae73  -n osd.1 -f --set...  11 minutes ago  Up 11 minutes ago              ceph-6191f79a-f21d-4b93-b70f-cdd2a974f216-osd-1
+ae54e2dd1742  cp.icr.io/cp/ibm-ceph/ceph-5-rhel8@sha256:7789c46fd770642b5794c5d7a39a7039b47665fa5a62ee8a2156e783020cae73  -n osd.11 -f --se...  10 minutes ago  Up 10 minutes ago              ceph-6191f79a-f21d-4b93-b70f-cdd2a974f216-osd-11
+07f7997bfc03  cp.icr.io/cp/ibm-ceph/ceph-5-rhel8@sha256:7789c46fd770642b5794c5d7a39a7039b47665fa5a62ee8a2156e783020cae73  -n osd.5 -f --set...  10 minutes ago  Up 10 minutes ago              ceph-6191f79a-f21d-4b93-b70f-cdd2a974f216-osd-5
+0bf1b8f476e7  cp.icr.io/cp/ibm-ceph/ceph-5-rhel8@sha256:7789c46fd770642b5794c5d7a39a7039b47665fa5a62ee8a2156e783020cae73  -n osd.8 -f --set...  10 minutes ago  Up 10 minutes ago              ceph-6191f79a-f21d-4b93-b70f-cdd2a974f216-osd-8
+e34d3bc0f69a  cp.icr.io/cp/ibm-ceph/ceph-5-rhel8@sha256:7789c46fd770642b5794c5d7a39a7039b47665fa5a62ee8a2156e783020cae73  -n client.rgw.cep...  8 minutes ago   Up 8 minutes ago               ceph-6191f79a-f21d-4b93-b70f-cdd2a974f216-rgw-ceph-node01-ceph-node01-yedjar
+db6b831696ee  docker.io/prom/node-exporter:v0.17.0                                                                        --no-collector.ti...  8 minutes ago   Up 8 minutes ago               ceph-6191f79a-f21d-4b93-b70f-cdd2a974f216-node-exporter-ceph-node01</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Remove the flags.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># ceph osd unset noout
+noout is unset
+# ceph osd unset noscrub
+noscrub is unset
+# ceph osd unset nodeep-scrub
+nodeep-scrub is unset</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>One more check RGW is working, and sync is ok</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># for i in {1..10};do aws --endpoint http://ceph-mon01.example.com:8080 s3 cp /etc/resolv.conf s3://testbucket/final${i};done</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_move_cluster_ceph_mon_to_ibm_storage_ceph"><a class="anchor" href="#_move_cluster_ceph_mon_to_ibm_storage_ceph"></a>13. Move cluster ceph-mon to IBM storage Ceph</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Just repeat the same steps as for <code>ceph-node</code> cluster, and you will be ready to go.</p>
+</div>
+</div>
+</div>
+</article>
+  </div>
+</main>
+</div>
+<footer class="footer">
+  <a class="navbar-item" href="https://www.redhat.com/en/technologies/cloud-computing/openshift-container-storage" target="_blank">
+      <img src="../_/img/header_logo.svg" alt="Ceph">
+  </a>
+</footer>
+<script id="site-script" src="../_/js/site.js" data-ui-root-path="../_"></script>
+<script async src="../_/js/vendor/highlight.js"></script>
+  </body>
+</html>
