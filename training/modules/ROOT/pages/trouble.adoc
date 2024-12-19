@@ -64,9 +64,14 @@ $ sudo -i
 
 You can monitor the progress of the playbook by checking the Ansible log. When the log reaches the task with the message:
 
-*TASK [Don't stop this playbook; leave it running during the session]*
+----
+TASK [Don't stop this playbook; leave it running during the session]*
+----
 
-indicates the playbook has completed its initial setup, and you can proceed to the next steps.
+The Ansible playbook has completed its initial setup, and you can proceed to
+the next steps, you can also check the logs of the playbook using the
+/root/ansible.log file, here is an example of the output of the file when it
+has finished the ansible playbook run:
 
 ----
 # tail -f /root/ansible.log
@@ -76,8 +81,8 @@ changed: [localhost]
 TASK [Don't stop this playbook; leave it running during the session] ***********
 ----
 
-Once we open the new terminal, this is the current status of our cluster, not
-looking good:
+From the same terminal or in a new one, we can investigate the current status
+of our cluster, its quite a mess, lets take a closer look:
 
 ----
 # ceph -s
@@ -116,13 +121,19 @@ looking good:
     client:   85 B/s rd, 23 KiB/s wr, 0 op/s rd, 23 op/s wr
 ----
 
-IMPORTANT: From this point forward the guide will help you fix the issues one by one, we would recommend that you try fixing the cluster problems by yourself and if you get stuck you use this guide to help you out.
+
+[IMPORTANT]
+====
+From this point forward, the guide will help you fix the issues one by one. **We recommend that you first try resolving the cluster problems on your own.** If you get stuck, refer to this guide for assistance.
+====
+
+
 
 == Let the Fun Begin, Fixing our cluster issues:
 
 We are going to work our way up from the Core fixing the issues one by one, so we will
-begin with the OSDs, we can see from the health report that `3 osds down` are
-marked down, and we have `63 pgs inactive` as you already know
+begin with the OSDs, we can see from the `ceph -s` health reports that `3 osds down` are
+marked down, and we have `63 pgs inactive`. As you already know
 inactive PGs are a big issue as they are not accessible to the clients and IO
 will freeze or error out when trying to access those PGs for reads or writes
 
@@ -130,12 +141,14 @@ NOTE: It's vital to notice that the 3 OSDs are `DOWN` but not `OUT` as you
 can see from this line of output in the ceph -s command, where 12 osds are
 still in the cluster although only 9 are up `osd: 12 osds: 9 up (since 102s), 12 in (since 9h)`
 
-NOTE: Why is this important? As you already know, Ceph/Rados won't tack action and
+NOTE: Why is this important? As you already know, Ceph/Rados won't take action and
 start the recovery of the data for the failed OSDs until the OSDs are declared
-OUT, the time it takes for an OSD to be declared out is configurable with the
+DOWN + OUT, the time it takes for an OSD to be declared out is configurable with the
 config parameter `mon_osd_down_out_interval` by default set to 10 minutes.
 
-TIP: Important Ceph config parameters related to OSDs being DOWN, OUT.
+TIP
+====
+Important Ceph config parameters related to OSDs being DOWN, OUT.
 [cols="1,3", options="header"]
 |===
 | Parameter | Description
@@ -155,7 +168,7 @@ TIP: Important Ceph config parameters related to OSDs being DOWN, OUT.
 | mon_osd_down_out_subtree_limit
 | Sets the CRUSH subtree level (failure domain) at which the monitors will avoid marking OSDs as down or out if they become unreachable.
 |=== 
-
+====
 
 
 Let’s get a `ceph health detail` output to have a deeper look into the issues we are facing
@@ -220,7 +233,9 @@ This shows that PG 3.f7 is currently mapped to OSD 3 both in the up and acting s
 
 TIP: you can get a detailed status of a specific PG using the query command `# ceph pg 3.f7 query`
 
-TIP: Here is a table with the most important PG states that can help you understand the differences:
+TIP: 
+====
+Here is a table with the most important PG states that can help you understand the differences:
 [cols="1,3", options="header"]
 |===
 | State | Description
@@ -248,6 +263,7 @@ TIP: Here is a table with the most important PG states that can help you underst
 |===
 
 For more details, see the link:https://docs.ceph.com/en/reef/rados/operations/pg-states/[Ceph PG States Documentation].
+====
 
 
 === Fixing Issue Number 1

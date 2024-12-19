@@ -12,8 +12,9 @@
 <header class="header">
   <nav class="navbar">
     <div class="navbar-brand">
-      <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank">
+      <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank" style="display: flex; align-items: center; gap: 20px;">
           <img src="../_/img/header_logo_reverse.svg" height="48px" alt="Ceph">
+          <span style="color: white; font-family: 'Roboto', sans-serif; font-size: 1.2rem; font-weight: 500;"> IBM Storage Ceph</span>
       </a>
       <button class="navbar-burger" data-target="topbar-nav">
         <span></span>
@@ -26,22 +27,23 @@
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">Get Help</a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://access.redhat.com/documentation/zh-cn/red_hat_ceph_storage/5" target="_blank">Ceph Documentation</a>
+            <a class="navbar-item" href="https://www.ibm.com/docs/en/storage-ceph/latest" target="_blank">IBM Storage Ceph Documentation</a>
             <a class="navbar-item" href="https://bugzilla.redhat.com/describecomponents.cgi?product=Red%20Hat%20OpenShift%20Container%20Storage" target="_blank">Browse Bugs</a>
           </div>
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">Improve Guides</a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://github.com/likid0/ceph-top-gun-enablement/issues/new/choose" target="_blank">Open Issue</a>
+            <a class="navbar-item"
+            href="https://github.com/likid0/1528-Troubleshooting-Ceph-Repo/issues/new/choose" target="_blank">Open Issue</a>
           </div>
         </div>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">More Infos</a>
           <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://www.redhat.com/en/blog/channel/red-hat-storage" target="_blank">Our Blog</a>
-            <a class="navbar-item" href="https://www.youtube.com/channel/UCoyG8VyvB-XUxQl1mD3T3Gw" target="_blank">Youtube</a>
-            <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank">Ceph Storage Technology</a>
+            <a class="navbar-item" href="https://community.ibm.com/community/user/storage/communities/community-home?CommunityKey=1142f81e-95e4-4381-95d0-7977f20d53fa" target="_blank">Our Blog</a>
+            <a class="navbar-item" href="https://www.youtube.com/@_shifthappens" target="_blank">IBM Shift Hapens Youtube Channel</a>
+            <a class="navbar-item" href="https://docs.ceph.com/en/latest/" target="_blank">Upstream Ceph Storage Technology</a>
           </div>
         </div>
       </div>
@@ -55,14 +57,14 @@
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
     <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
-    <h3 class="title"><a href="index.html">IBM Storage Ceph Troubleshooting Workshop</a></h3>
+    <h3 class="title"><a href="index.html">IBM Tech Zone IBM Storage</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
     <button class="nav-item-toggle"></button>
-    <span class="nav-text">IBM Storage Ceph Troubleshooting Workshop</span>
+    <span class="nav-text">Troubleshooting Workshop</span>
 <ul class="nav-list">
   <li class="nav-item is-current-page" data-depth="1">
-    <a class="nav-link" href="trouble.html">IBM Storage Ceph Troubleshooting Workshop</a>
+    <a class="nav-link" href="trouble.html">Ceph Break &amp; Fix Lab One</a>
   </li>
 </ul>
   </li>
@@ -71,12 +73,12 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">IBM Storage Ceph Troubleshooting Workshop</span>
+    <span class="title">IBM Tech Zone IBM Storage</span>
     <span class="version">master</span>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="index.html">IBM Storage Ceph Troubleshooting Workshop</a></div>
+      <div class="title"><a href="index.html">IBM Tech Zone IBM Storage</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
           <a href="index.html">master</a>
@@ -94,8 +96,9 @@
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li>IBM Storage Ceph Troubleshooting Workshop</li>
-    <li><a href="trouble.html">IBM Storage Ceph Troubleshooting Workshop</a></li>
+    <li><a href="index.html">IBM Tech Zone IBM Storage</a></li>
+    <li>Troubleshooting Workshop</li>
+    <li><a href="trouble.html">Ceph Break &amp; Fix Lab One</a></li>
   </ul>
 </nav>
 <div class="edit-this-page"><a href="file:///antora/training/modules/ROOT/pages/trouble.adoc">Edit this Page</a></div>
@@ -188,11 +191,15 @@ healthy cluster.</p>
 <div class="paragraph">
 <p>You can monitor the progress of the playbook by checking the Ansible log. When the log reaches the task with the message:</p>
 </div>
-<div class="paragraph">
-<p><strong>TASK [Don&#8217;t stop this playbook; leave it running during the session]</strong></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">TASK [Don't stop this playbook; leave it running during the session]*</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<p>indicates the playbook has completed its initial setup, and you can proceed to the next steps.</p>
+<p>indicates the playbook has completed its initial setup, and you can proceed to
+the next steps, you can also check the logs of the playbook using the
+/root/ansible.log file</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -204,8 +211,8 @@ TASK [Don't stop this playbook; leave it running during the session] ***********
 </div>
 </div>
 <div class="paragraph">
-<p>Once we open the new terminal, this is the current status of our cluster, not
-looking good:</p>
+<p>Once we open the new terminal, we can investigat the current status of our
+cluster, and its quite a mess, take a look:</p>
 </div>
 <div class="listingblock">
 <div class="content">

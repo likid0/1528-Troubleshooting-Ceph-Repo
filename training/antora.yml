@@ -1,5 +1,5 @@
 name: training
-title: IBM Storage Ceph Troubleshooting Workshop
+title: IBM Tech Zone IBM Storage
 version: master
 nav:
   - modules/ROOT/nav.adoc
