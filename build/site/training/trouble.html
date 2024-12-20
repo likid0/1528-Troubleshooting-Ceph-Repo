@@ -57,7 +57,7 @@
 <div class="nav-panel-menu is-active" data-panel="menu">
   <nav class="nav-menu">
     <button class="nav-menu-toggle" aria-label="Toggle expand/collapse all" style="display: none"></button>
-    <h3 class="title"><a href="index.html">IBM Tech Zone IBM Storage</a></h3>
+    <h3 class="title"><a href="index.html">Tech-Zone IBM Storage</a></h3>
 <ul class="nav-list">
   <li class="nav-item" data-depth="0">
     <button class="nav-item-toggle"></button>
@@ -73,12 +73,12 @@
 </div>
 <div class="nav-panel-explore" data-panel="explore">
   <div class="context">
-    <span class="title">IBM Tech Zone IBM Storage</span>
+    <span class="title">Tech-Zone IBM Storage</span>
     <span class="version">master</span>
   </div>
   <ul class="components">
     <li class="component is-current">
-      <div class="title"><a href="index.html">IBM Tech Zone IBM Storage</a></div>
+      <div class="title"><a href="index.html">Tech-Zone IBM Storage</a></div>
       <ul class="versions">
         <li class="version is-current is-latest">
           <a href="index.html">master</a>
@@ -96,7 +96,7 @@
   <a href="index.html" class="home-link"></a>
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
-    <li><a href="index.html">IBM Tech Zone IBM Storage</a></li>
+    <li><a href="index.html">Tech-Zone IBM Storage</a></li>
     <li>Troubleshooting Workshop</li>
     <li><a href="trouble.html">Ceph Break &amp; Fix Lab One</a></li>
   </ul>
@@ -132,8 +132,8 @@
 <div class="paragraph">
 <p>This troubleshooting guide offers a practical, hands-on approach to diagnosing
 and resolving issues within an IBM Storage Ceph cluster. By employing a 'break
-and fix' methodology, you will begin with a healthy cluster, simulate
-real-world challenges, that you will need to resolve . This approach ensures a practical learning experience and helps users confidently handle real-world troubleshooting scenarios.</p>
+and fix' methodology, you will begin with a healthy cluster that simulates
+real-world challenges you must resolve. This approach ensures a practical learning experience and helps users confidently handle real-world troubleshooting scenarios.</p>
 </div>
 </div>
 </div>
@@ -141,11 +141,19 @@ real-world challenges, that you will need to resolve . This approach ensures a p
 <h2 id="_checking_the_current_state_of_the_lab"><a class="anchor" href="#_checking_the_current_state_of_the_lab"></a>2. Checking the current state of the lab</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Once the TechZone lab is deployed, a pre-configured environment for testing and learning, you will have an IBM Storage Ceph cluster running. To deploy it, follow the setup instructions provided in the TechZone documentation. For detailed guidance on accessing a TechZone lab, visit [TechZone Lab Access](<a href="https://techzone.ibm.com/collection/64b92c8897187f0017773310" class="bare">https://techzone.ibm.com/collection/64b92c8897187f0017773310</a>).</p>
+<p>If you are reading this doc, you should have your IBM Storage Ceph
+Troubleshooting TechZone Lab up and running. If that is not the case, please go
+to the IBM Storage Ceph Tech-Zone Collection and Order the troubleshooting Lab <a href="https://techzone.ibm.com/collection/64b92c8897187f0017773310)">TechZone Lab Access</a></p>
+</div>
+<div class="paragraph">
+<p>We must open a CLI terminal in our workstation machine and sudo to run the
+lab commands as the <code>ROOT</code> user. The workstation has the required ceph client
+RPMs and the CephX admin keys for our deployment so that
+we can run most of the necessary commands for this lab from the workstation.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell"># sudo -i
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">$ sudo -i
 # ceph -s
   cluster:
     id:     09f357c6-b8d6-11ef-bbb7-02009a7a348a
@@ -197,9 +205,10 @@ healthy cluster.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>indicates the playbook has completed its initial setup, and you can proceed to
+<p>The Ansible playbook has completed its initial setup, and you can proceed to
 the next steps, you can also check the logs of the playbook using the
-/root/ansible.log file</p>
+/root/ansible.log file, here is an example of the output of the file when it
+has finished the ansible playbook run:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -211,8 +220,8 @@ TASK [Don't stop this playbook; leave it running during the session] ***********
 </div>
 </div>
 <div class="paragraph">
-<p>Once we open the new terminal, we can investigat the current status of our
-cluster, and its quite a mess, take a look:</p>
+<p>From the same terminal or in a new one, we can investigate the current status
+of our cluster, its quite a mess, lets take a closer look:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -259,7 +268,9 @@ cluster, and its quite a mess, take a look:</p>
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-From this point forward the guide will help you fix the issues one by one, we would recommend that you try fixing the cluster problems by yourself and if you get stuck you use this guide to help you out.
+<div class="paragraph">
+<p>From this point forward, the guide will help you fix the issues one by one. <strong>We recommend that you first try resolving the cluster problems on your own.</strong> If you get stuck, refer to this guide for assistance.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -271,8 +282,8 @@ From this point forward the guide will help you fix the issues one by one, we wo
 <div class="sectionbody">
 <div class="paragraph">
 <p>We are going to work our way up from the Core fixing the issues one by one, so we will
-begin with the OSDs, we can see from the health report that <code>3 osds down</code> are
-marked down, and we have <code>63 pgs inactive</code> as you already know
+begin with the OSDs, we can see from the <code>ceph -s</code> health reports that <code>3 osds down</code> are
+marked down, and we have <code>63 pgs inactive</code>. As you already know
 inactive PGs are a big issue as they are not accessible to the clients and IO
 will freeze or error out when trying to access those PGs for reads or writes</p>
 </div>
@@ -297,9 +308,9 @@ still in the cluster although only 9 are up <code>osd: 12 osds: 9 up (since 102s
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-Why is this important? As you already know, Ceph/Rados won&#8217;t tack action and
+Why is this important? As you already know, Ceph/Rados won&#8217;t take action and
 start the recovery of the data for the failed OSDs until the OSDs are declared
-OUT, the time it takes for an OSD to be declared out is configurable with the
+DOWN + OUT, the time it takes for an OSD to be declared out is configurable with the
 config parameter <code>mon_osd_down_out_interval</code> by default set to 10 minutes.
 </td>
 </tr>
@@ -312,10 +323,8 @@ config parameter <code>mon_osd_down_out_interval</code> by default set to 10 min
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Important Ceph config parameters related to OSDs being DOWN, OUT.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Important Ceph config parameters related to OSDs being DOWN, OUT.</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -351,6 +360,10 @@ Important Ceph config parameters related to OSDs being DOWN, OUT.
 </tr>
 </tbody>
 </table>
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Let’s get a <code>ceph health detail</code> output to have a deeper look into the issues we are facing</p>
 </div>
@@ -440,10 +453,8 @@ you can get a detailed status of a specific PG using the query command <code># c
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-Here is a table with the most important PG states that can help you understand the differences:
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Here is a table with the most important PG states that can help you understand the differences:</p>
 </div>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
@@ -489,6 +500,10 @@ Here is a table with the most important PG states that can help you understand t
 </table>
 <div class="paragraph">
 <p>For more details, see the <a href="https://docs.ceph.com/en/reef/rados/operations/pg-states/">Ceph PG States Documentation</a>.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
 <h3 id="_fixing_issue_number_1"><a class="anchor" href="#_fixing_issue_number_1"></a>4.1. Fixing Issue Number 1</h3>

@@ -16,16 +16,22 @@
 
 This troubleshooting guide offers a practical, hands-on approach to diagnosing
 and resolving issues within an IBM Storage Ceph cluster. By employing a 'break
-and fix' methodology, you will begin with a healthy cluster, simulate
-real-world challenges, that you will need to resolve . This approach ensures a practical learning experience and helps users confidently handle real-world troubleshooting scenarios.
+and fix' methodology, you will begin with a healthy cluster that simulates
+real-world challenges you must resolve. This approach ensures a practical learning experience and helps users confidently handle real-world troubleshooting scenarios.
 
 == Checking the current state of the lab
 
-Once the TechZone lab is deployed, a pre-configured environment for testing and learning, you will have an IBM Storage Ceph cluster running. To deploy it, follow the setup instructions provided in the TechZone documentation. For detailed guidance on accessing a TechZone lab, visit [TechZone Lab Access](https://techzone.ibm.com/collection/64b92c8897187f0017773310).
+If you are reading this doc, you should have your IBM Storage Ceph
+Troubleshooting TechZone Lab up and running. If that is not the case, please go
+to the IBM Storage Ceph Tech-Zone Collection and Order the troubleshooting Lab https://techzone.ibm.com/collection/64b92c8897187f0017773310)[TechZone Lab Access]
 
+We must open a CLI terminal in our workstation machine and sudo to run the
+lab commands as the `ROOT` user. The workstation has the required ceph client
+RPMs and the CephX admin keys for our deployment so that
+we can run most of the necessary commands for this lab from the workstation.
 
 ----
-# sudo -i
+$ sudo -i
 # ceph -s
   cluster:
     id:     09f357c6-b8d6-11ef-bbb7-02009a7a348a
@@ -146,7 +152,7 @@ start the recovery of the data for the failed OSDs until the OSDs are declared
 DOWN + OUT, the time it takes for an OSD to be declared out is configurable with the
 config parameter `mon_osd_down_out_interval` by default set to 10 minutes.
 
-TIP
+[TIP]
 ====
 Important Ceph config parameters related to OSDs being DOWN, OUT.
 [cols="1,3", options="header"]
@@ -169,7 +175,6 @@ Important Ceph config parameters related to OSDs being DOWN, OUT.
 | Sets the CRUSH subtree level (failure domain) at which the monitors will avoid marking OSDs as down or out if they become unreachable.
 |=== 
 ====
-
 
 Let’s get a `ceph health detail` output to have a deeper look into the issues we are facing
 
@@ -233,7 +238,7 @@ This shows that PG 3.f7 is currently mapped to OSD 3 both in the up and acting s
 
 TIP: you can get a detailed status of a specific PG using the query command `# ceph pg 3.f7 query`
 
-TIP: 
+[TIP]
 ====
 Here is a table with the most important PG states that can help you understand the differences:
 [cols="1,3", options="header"]
@@ -264,7 +269,6 @@ Here is a table with the most important PG states that can help you understand t
 
 For more details, see the link:https://docs.ceph.com/en/reef/rados/operations/pg-states/[Ceph PG States Documentation].
 ====
-
 
 === Fixing Issue Number 1
 
