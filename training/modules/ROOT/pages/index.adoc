@@ -14,8 +14,8 @@ Concepts & Architecture, The content of the workshop is a technical Hands-on  Br
 == Recommended Pre-Requisites before starting the enablement. 
 
 Before completing this course, there are some previous Tech-Zone Labs that we
-would recommended doing first, here is the list of Storage Ceph training available in Tech-Zone
-That we would recommend completing before starting this enablement:
+would recommend doing first; here is the list of Storage Ceph training available in Tech-Zone
+We would recommend completing the following before starting this enablement:
 
 . https://techzone.ibm.com/my/reservations/create/6567862cba056800175b6279[Install and Configure a Ceph Cluster] : Learn to set up a robust IBM Storage Ceph environment from scratch and deploy the Object Storage service using the Dashboard.
 . https://techzone.ibm.com/my/reservations/create/66c880e5eff555001e6e3582[Explore Advanced Object Storage Features] : Dive deep into SSL configuration, bucket policies, audit logs, Storage Class Tiering, and lifecycle management to enhance the security and efficiency of your object storage.
