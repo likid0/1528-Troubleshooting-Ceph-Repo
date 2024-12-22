@@ -564,6 +564,21 @@ re-create/distribute the keys, but let's be pragmatic. All our PGs are active
 even if undersized, and the data from OSD.1 has been copied through recovery to other OSDs once
 it was declared out of the cluster, so let's move forward, and just recreate OSD.1, at this point it's safe and the fastest way to get it back online again.
 
+[TIP]
+====
+In a Ceph cluster, each Object Storage Daemon (OSD) has its own dedicated directory to store data and metadata. This directory is essential for understanding how Ceph manages its storage backend.
+The OSD directory is typically found in the /var/lib/ceph/osd/ path. Each directory is named based on the OSD ID assigned by the cluster.
+
+Important files in the OSD dir:
+*block:* A symbolic link pointing to the block device used by BlueStore.
+*ceph_fsid:* Contains the unique identifier (UUID) for the Ceph cluster. This UUID matches the one displayed by the ceph -s command.
+*keyring:* Stores the authentication key for the OSD to communicate with the monitor daemons (MONs).
+*kv_backend:* Indicates the key-value store used, such as RocksDB, which manages metadata like object-to-disk mappings.
+*unit.*: Files related with the systemd unit and the starting of the OSD service
+====
+
+
+
 Before we delete the OSD, let's get some information, like the underlying media
 it's using, here are three different ways to achieve the information.
 
@@ -587,9 +602,9 @@ ceph-node1-67628e99e82f4213d363447b  /dev/vdd  hdd   02d7-b81fcb20-fd60-4  10.0G
 
 So the device is named vdd in ceph-node1, and we can double-check that cephadm
 uses LVM with the OSD, so it creates a PV/VG/LV per OSD; this is the simple
-an example, where we have all our bluestore components, Data,D B and Metadata in a
-single device, as you know, the DB and WAL can be on NVMe flash media devices
-to improve performance.
+an example, where we have all our bluestore components, Data(block),
+DB(block.db) and WAL(block.wal) in a single device, as you know, the DB and WAL can be on a diffent device, like for
+example NVMe flash media devices to improve performance.
 
 ----
 # ssh ceph-node1 lsblk | grep -C 2 vdd
